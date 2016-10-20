@@ -2,6 +2,8 @@ package br.acme.users;
 
 public class Usuario {
 	//Atributos-----------------------------------------------------------------------------------------------------
+	private long id;
+	private static long idIncrement=1;
 	private String cpf;
 	private String nome;
 	private String senha;
@@ -9,6 +11,10 @@ public class Usuario {
 	private String sexo;
 	//contrutor------------------------------------------------------------------------------------------------------
 	public Usuario(String cpf, String nome, String senha, String email, String sexo){
+		//static id ++ para o objeto
+		idIncrement++;	
+		//id = Ao static id atual
+		this.id = idIncrement;
 		this.cpf= cpf;
 		this.nome = nome;
 		this.senha =senha;
@@ -17,6 +23,13 @@ public class Usuario {
 	}
   
 	//Getters e Setters-----------------------------------------------------------------------------------------------
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getCpf(){
 		return cpf;
 	}
@@ -54,10 +67,12 @@ public class Usuario {
 	public void setSexo(String sexo){
 		this.sexo = sexo;
 	}
-	
+	 public long getidIncrement(){
+		 return idIncrement;
+	 }
 	//métodos-------------------------------------------------------------------------------------------
 	public String toString(){
 		
-		return " nome: "+this.nome+" cpf: "+this.cpf+" senha: "+this.senha+" email: "+this.email+" sexo: "+this.sexo;
+		return "ID:"+this.id+"nome: "+this.nome+" cpf: "+this.cpf+" senha: "+this.senha+" email: "+this.email+" sexo: "+this.sexo;
 	}
 }
