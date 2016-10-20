@@ -4,6 +4,8 @@ import br.acme.users.Solicitante;;
 
 public class Viagem {
 	// Atributos ----------------------------------------------------------------------------------------------------
+	//static atributo pertence a classe entao ele ja incrementa todos os id's
+	private static long idIncrement=0;
 	private long id;
 	private Solicitante cliente;
 	private Motorista motorista;
@@ -13,8 +15,11 @@ public class Viagem {
 	private String formaPagamento;
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
-	public Viagem(long id, Solicitante cliente, Motorista motorista, Lugar origem, Lugar destino, double valorViagem, String formaPagamento) {
-		this.id = id;
+	public Viagem(Solicitante cliente, Motorista motorista, Lugar origem, Lugar destino, double valorViagem, String formaPagamento) {
+		//static id ++ para o proximo objeto
+		this.idIncrement++;
+		//id = Ao static id atual
+		this.id = this.idIncrement;
 		this.cliente = cliente;
 		this.motorista = motorista;
 		this.origem = origem;
@@ -78,6 +83,14 @@ public class Viagem {
 
 	public void setFormaPagamento(String formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+	
+	//metodos--------------------------------------------------------------------------------------------
+	
+	public String toString(){
+		return " ID: "+this.id+cliente.toString()+motorista.toString()+
+				origem.toString()+destino.toString()+" ValorViagem: "
+				+this.valorViagem+" Forma de Pagamento: "+this.formaPagamento;
 	}
 	
 }

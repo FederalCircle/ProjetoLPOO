@@ -10,9 +10,9 @@ public class TesteRepositorioMotorista {
 	public static void main(String[] args) {
 		
 		// Criando os Motoristas ----------------------------------------------------------------------------------------------------
-		Motorista motJose = new Motorista(4, "333.333.333-33", "Jose", "jose123", "jose@motor.com", "Masculino", true);
-		Motorista motAna = new Motorista(5, "444.444.444-44", "Ana", "ana123", "ana@motor.com", "Feminino", true);
-		Motorista motMaria = new Motorista(6, "555.555.555-55", "Maria", "maria123", "maria@motor.com", "Feminino", true);
+		Motorista motJose = new Motorista("333.333.333-33", "Jose", "jose123", "jose@motor.com", "Masculino", true);
+		Motorista motAna = new Motorista( "444.444.444-44", "Ana", "ana123", "ana@motor.com", "Feminino", true);
+		Motorista motMaria = new Motorista( "555.555.555-55", "Maria", "maria123", "maria@motor.com", "Feminino", true);
 		
 		// Criando o repositório ----------------------------------------------------------------------------------------------------
 		RepositorioMotorista repositorio = new RepositorioMotorista();

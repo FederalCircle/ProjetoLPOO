@@ -21,9 +21,9 @@ public class TesteRepositorioViagem {
 		Solicitante solAndre = new Solicitante(3, "333.333.333-33", "andre@travel.com", "andre123", "André", "Masculino", dataNascimento, 99332211);
 		
 		// Criando os motoristas
-		Motorista motJose = new Motorista(4, "333.333.333-33", "Jose", "jose123", "jose@motor.com", "Masculino", true);
-		Motorista motAna = new Motorista(5, "444.444.444-44", "Ana", "ana123", "ana@motor.com", "Feminino", true);
-		Motorista motMaria = new Motorista(6, "555.555.555-55", "Maria", "maria123", "maria@motor.com", "Feminino", true);
+		Motorista motJose = new Motorista("333.333.333-33", "Jose", "jose123", "jose@motor.com", "Masculino", true);
+		Motorista motAna = new Motorista("444.444.444-44", "Ana", "ana123", "ana@motor.com", "Feminino", true);
+		Motorista motMaria = new Motorista("555.555.555-55", "Maria", "maria123", "maria@motor.com", "Feminino", true);
 		
 		//Criando os lugares
 		Lugar inicio = new Lugar("Praça", "Rua Alpha, 256");
@@ -31,9 +31,9 @@ public class TesteRepositorioViagem {
 		
 		// Criando os Viagems ----------------------------------------------------------------------------------------------------
 
-		Viagem  travel1 = new Viagem(1, solPaula, motAna, inicio, fim, 50, "Cartão");
-		Viagem  travel2 = new Viagem(2, solPedro, motJose, inicio, fim, 55, "à Vista");
-		Viagem  travel3 = new Viagem(3, solAndre, motMaria, inicio, fim, 60, "Cheque");
+		Viagem  travel1 = new Viagem(solPaula, motAna, inicio, fim, 50, "Cartão");
+		Viagem  travel2 = new Viagem( solPedro, motJose, inicio, fim, 55, "à Vista");
+		Viagem  travel3 = new Viagem( solAndre, motMaria, inicio, fim, 60, "Cheque");
 		
 		// Criando o repositório ----------------------------------------------------------------------------------------------------
 		RepositorioViagem repositorio = new RepositorioViagem();
@@ -70,6 +70,8 @@ public class TesteRepositorioViagem {
 			System.out.println("#"+travel.getId()+"\t\t"+travel.getOrigem().getEndereco()+"\t\t"+travel.getDestino().getEndereco());
 		}
 		System.out.println();
+		System.out.println(travel1.toString());
+
 
 	}
 

@@ -3,14 +3,16 @@ import java.util.Date;
 
 import br.acme.location.*;
 
-public class Solicitante {
+public class Solicitante extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private long id;
-	private String cpf;
+	//atributo static pertence a classe portanto nao reinicia
+		private static long idIncrement =0;
+	/*private String cpf;
 	private String email;
 	private String senha;
 	private String nome;
-	private String sexo;
+	private String sexo;*/
 	private Date dataNascimento = new Date();
 	private int numeroCelular;
 	private Lugar[] lugares = new Lugar[10];
@@ -18,12 +20,17 @@ public class Solicitante {
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Solicitante(long id, String cpf, String email, String senha, String nome, String sexo, Date dataNascimento, int numeroCelular) {
-		this.id = id;
-		this.cpf = cpf;
+		//Usando o contrutor da super
+		super(cpf,nome,senha,email,sexo);
+		//static id ++ para definir o id do objeto
+		idIncrement++;		
+		//id = Ao static id atual
+		this.id = idIncrement;
+		/*this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
-		this.sexo = sexo;
+		this.sexo = sexo;*/
 		this.dataNascimento = dataNascimento;
 		this.numeroCelular = numeroCelular;
 	}
@@ -36,7 +43,7 @@ public class Solicitante {
 	public void setId(long id) {
 		this.id = id;
 	}
-
+/*
 	public String getCpf() {
 		return cpf;
 	}
@@ -76,7 +83,7 @@ public class Solicitante {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-
+*/
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -120,5 +127,10 @@ public class Solicitante {
 	
 	public void historico(){
 		
+	}
+	public String toString(){
+		return " ID: "+this.id+super.toString()+" Data de Nascimento :"
+		+ ""+this.dataNascimento+"Numero Celular: "+this.numeroCelular
+		+lugares.toString()+viagens.toString();
 	}
 }

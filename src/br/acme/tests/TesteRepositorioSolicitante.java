@@ -61,6 +61,7 @@ public class TesteRepositorioSolicitante {
 			System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 		}
 		System.out.println();
+		System.out.println(userPaula.toString());	
 	}
 
 }

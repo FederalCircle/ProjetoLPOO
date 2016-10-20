@@ -27,4 +27,8 @@ public class Lugar {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+	//métodos---------------------------------------------------------------------------------------
+	public String toString(){
+		return " ID Lugar: "+this.identificadorLugar+" Endereço: "+this.endereco;
+	}
 }

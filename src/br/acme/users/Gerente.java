@@ -1,23 +1,20 @@
 package br.acme.users;
 
-public class Gerente {
+public class Gerente extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private long id;
-	private String cpf;
-	private String nome;
-	private String senha;
-	private String email;
-	private String sexo;
-	
+	//atributo static pertence a classe portanto nao reinicia
+		private static long idIncrement =1;
 	// Construtor ----------------------------------------------------------------------------------------------------
-	public Gerente(long id, String cpf, String nome, String senha, String email, String sexo){
-		this.id = id;
-		this.cpf = cpf;
-		this.nome = nome;
-		this.senha = senha;
-		this.email = email;
-		this.sexo = sexo;
-	}
+	public Gerente(String cpf, String nome, String senha, String email, String sexo){
+		//Usando o contrutor da super
+		super(cpf,nome,senha,email,sexo);
+		//static id ++ para o objeto
+		idIncrement++;	
+		//id = Ao static id atual
+		this.id = idIncrement;
+		
+			}
 
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
 	public long getId() {
@@ -27,7 +24,7 @@ public class Gerente {
 	public void setId(long id) {
 		this.id = id;
 	}
-
+/*
 	public String getCpf() {
 		return cpf;
 	}
@@ -67,7 +64,7 @@ public class Gerente {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
+	*/
 	// Métodos ----------------------------------------------------------------------------------------------------
 	public void cadastrarMotorista(Motorista newbie){
 		
@@ -84,4 +81,8 @@ public class Gerente {
 	public void listarClientes(){
 		
 	}
+	public String toString(){
+		return " ID: "+this.id+super.toString();
+	}
+	
 }

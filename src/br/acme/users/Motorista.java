@@ -1,25 +1,27 @@
 package br.acme.users;
 import br.acme.location.*;
 
-public class Motorista {
+public class Motorista extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
-	private long id;
+	//atributo static pertence a classe portanto nao reinicia
+	private static long idIncrement =1;
+	private long id;/*
 	private String cpf;
 	private String nome;
 	private String senha;
 	private String email;
-	private String sexo;
+	private String sexo;*/
 	private boolean disponivel;
 	Viagem[] viagens = new Viagem[10];
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
-	public Motorista(long id, String cpf, String nome, String senha, String email, String sexo, boolean disponivel) {
-		this.id = id;
-		this.cpf = cpf;
-		this.nome = nome;
-		this.senha = senha;
-		this.email = email;
-		this.sexo = sexo;
+	public Motorista(String cpf, String nome, String senha, String email, String sexo, boolean disponivel) {
+		//Usando o contrutor da super
+		super(cpf,nome,senha,email,sexo);
+		//id = Ao static id atual
+		this.id = idIncrement;
+		//static id ++ para o objeto
+		idIncrement++;
 		this.disponivel = disponivel;
 	}
 
@@ -31,7 +33,7 @@ public class Motorista {
 	public void setId(long id) {
 		this.id = id;
 	}
-
+/*
 	public String getCpf() {
 		return cpf;
 	}
@@ -72,7 +74,7 @@ public class Motorista {
 		this.sexo = sexo;
 	}
 
-	public boolean isDisponivel() {
+	*/public boolean isDisponivel() {
 		return disponivel;
 	}
 
@@ -97,5 +99,9 @@ public class Motorista {
 	
 	public void historico(){
 		
+	}
+	
+	public String toString(){
+		return " ID "+this.id+super.toString()+" status: "+this.disponivel+viagens.toString();
 	}
 }
