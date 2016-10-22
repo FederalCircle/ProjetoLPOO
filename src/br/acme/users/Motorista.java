@@ -3,14 +3,12 @@ import br.acme.location.*;
 
 public class Motorista extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
-	//atributo static pertence a classe portanto nao reinicia
-
 	private boolean disponivel;
 	Viagem[] viagens = new Viagem[10];
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Motorista(String cpf, String nome, String senha, String email, String sexo, boolean disponivel) {
-		//Usando o contrutor da super
+		// Contrutor da superClasse
 		super(cpf,nome,senha,email,sexo);
 		this.disponivel = disponivel;
 	}
@@ -44,6 +42,6 @@ public class Motorista extends Usuario {
 	}
 	
 	public String toString(){
-		return super.toString()+" status: "+this.disponivel+viagens.toString();
+		return super.toString()+"Status: "+this.disponivel+viagens.toString();
 	}
 }

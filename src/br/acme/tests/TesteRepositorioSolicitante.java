@@ -12,9 +12,9 @@ public class TesteRepositorioSolicitante {
 		Date dataNascimento = new Date();
 		
 		// Criando os solicitantes ----------------------------------------------------------------------------------------------------
-		Solicitante userPaula = new Solicitante(1, "111.111.111-11", "paula@user.com", "123", "Paula", "Feminino", dataNascimento, 99112233);
-		Solicitante userPedro = new Solicitante(2, "222.222.222-22", "pedro@user.com", "abc", "Pedro", "Masculino", dataNascimento, 99887755);
-		Solicitante userAndre = new Solicitante(3, "333.333.333-33", "andre@user.com", "321", "André", "Masculino", dataNascimento, 99332211);
+		Solicitante userPaula = new Solicitante("111.111.111-11", "paula@user.com", "123", "Paula", "Feminino", dataNascimento, 99112233);
+		Solicitante userPedro = new Solicitante("222.222.222-22", "pedro@user.com", "abc", "Pedro", "Masculino", dataNascimento, 99887755);
+		Solicitante userAndre = new Solicitante("333.333.333-33", "andre@user.com", "321", "André", "Masculino", dataNascimento, 99332211);
 		
 		// Criando o repositório ----------------------------------------------------------------------------------------------------
 		RepositorioSolicitante repositorio = new RepositorioSolicitante();

@@ -17,9 +17,9 @@ public class Viagem {
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Viagem(Solicitante cliente, Motorista motorista, Lugar origem, Lugar destino, double valorViagem, String formaPagamento) {
 		//static id ++ para o proximo objeto
-		this.idIncrement++;
+		Viagem.idIncrement++;
 		//id = Ao static id atual
-		this.id = this.idIncrement;
+		this.id = Viagem.idIncrement;
 		this.cliente = cliente;
 		this.motorista = motorista;
 		this.origem = origem;
@@ -88,9 +88,9 @@ public class Viagem {
 	//metodos--------------------------------------------------------------------------------------------
 	
 	public String toString(){
-		return " ID: "+this.id+cliente.toString()+motorista.toString()+
-				origem.toString()+destino.toString()+" ValorViagem: "
-				+this.valorViagem+" Forma de Pagamento: "+this.formaPagamento;
+		return "ID: "+this.id+";"+cliente.toString()+motorista.toString()+
+				origem.toString()+destino.toString()+"Valor da viagem: "
+				+this.valorViagem+";Forma de Pagamento: "+this.formaPagamento+";";
 	}
 	
 }

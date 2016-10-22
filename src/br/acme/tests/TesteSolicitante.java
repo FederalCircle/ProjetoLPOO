@@ -8,7 +8,7 @@ public class TesteSolicitante {
 		Date dataNascimento = new Date();
 		
 		// Criando um solicitante ----------------------------------------------------------------------------------------------------
-		Solicitante userPaula = new Solicitante(1, "111.111.111-11", "paula@user.com", "123", "Paula", "Feminino", dataNascimento, 912345678);
+		Solicitante userPaula = new Solicitante("111.111.111-11", "paula@user.com", "123", "Paula", "Feminino", dataNascimento, 912345678);
 		
 		// Exibindo as informações ----------------------------------------------------------------------------------------------------
 		System.out.println("Informações do usuário..."
@@ -22,8 +22,7 @@ public class TesteSolicitante {
 				+ "\nData de nascimento: "+ userPaula.getDataNascimento());
 		
 		// Alterando as informações ----------------------------------------------------------------------------------------------------
-		userPaula.setNome(userPaula.getNome()+" Tejando");
-		userPaula.setId(2);
+		userPaula.setNome(userPaula.getNome()+" Fernandes");
 		userPaula.setSenha("abc");
 		userPaula.setCpf("222.222.222-22");
 		userPaula.setEmail("paula_tejando@user.com");

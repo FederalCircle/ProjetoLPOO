@@ -9,12 +9,11 @@ public class Usuario {
 	private String senha;
 	private String email;
 	private String sexo;
-	//contrutor------------------------------------------------------------------------------------------------------
+	
+	// Construtor------------------------------------------------------------------------------------------------------
 	public Usuario(String cpf, String nome, String senha, String email, String sexo){
-		//static id ++ para o objeto
-		idIncrement++;	
-		//id = Ao static id atual
-		this.id = idIncrement;
+		idIncrement++; //Elemento estático que varia de acordo com a quantidade de objetos
+		this.id = idIncrement; //Identifica o objeto a partir de um ID único
 		this.cpf= cpf;
 		this.nome = nome;
 		this.senha =senha;
@@ -22,14 +21,11 @@ public class Usuario {
 		this.sexo = sexo;		
 	}
   
-	//Getters e Setters-----------------------------------------------------------------------------------------------
+	// Getters e Setters-----------------------------------------------------------------------------------------------
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
 	public String getCpf(){
 		return cpf;
 	}
@@ -70,9 +66,10 @@ public class Usuario {
 	 public long getidIncrement(){
 		 return idIncrement;
 	 }
-	//métodos-------------------------------------------------------------------------------------------
+	
+	// Métodos-------------------------------------------------------------------------------------------
 	public String toString(){
 		
-		return "ID:"+this.id+"nome: "+this.nome+" cpf: "+this.cpf+" senha: "+this.senha+" email: "+this.email+" sexo: "+this.sexo;
+		return "ID: "+this.id+";Nome: "+this.nome+";CPF: "+this.cpf+";Senha: "+this.senha+";Email: "+this.email+";Sexo: "+this.sexo+";";
 	}
 }

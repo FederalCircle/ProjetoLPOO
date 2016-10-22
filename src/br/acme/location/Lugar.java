@@ -29,6 +29,6 @@ public class Lugar {
 	}
 	//métodos---------------------------------------------------------------------------------------
 	public String toString(){
-		return " ID Lugar: "+this.identificadorLugar+" Endereço: "+this.endereco;
+		return "Identificador do Lugar: "+this.identificadorLugar+";Endereço: "+this.endereco+";";
 	}
 }

@@ -5,85 +5,21 @@ import br.acme.location.*;
 
 public class Solicitante extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
-	private long id;
-	//atributo static pertence a classe portanto nao reinicia
-		private static long idIncrement =0;
-	/*private String cpf;
-	private String email;
-	private String senha;
-	private String nome;
-	private String sexo;*/
 	private Date dataNascimento = new Date();
 	private int numeroCelular;
 	private Lugar[] lugares = new Lugar[10];
 	private Viagem[] viagens = new Viagem[10];
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
-	public Solicitante(long id, String cpf, String email, String senha, String nome, String sexo, Date dataNascimento, int numeroCelular) {
-		//Usando o contrutor da super
+	public Solicitante(String cpf, String email, String senha, String nome, String sexo, Date dataNascimento, int numeroCelular) {
+		// Construtor da superClasse
 		super(cpf,nome,senha,email,sexo);
-		//static id ++ para definir o id do objeto
-		idIncrement++;		
-		//id = Ao static id atual
-		this.id = idIncrement;
-		/*this.cpf = cpf;
-		this.email = email;
-		this.senha = senha;
-		this.nome = nome;
-		this.sexo = sexo;*/
 		this.dataNascimento = dataNascimento;
 		this.numeroCelular = numeroCelular;
 	}
 
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
-	public long getId() {
-		return id;
-	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-/*
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-*/
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -129,8 +65,7 @@ public class Solicitante extends Usuario {
 		
 	}
 	public String toString(){
-		return " ID: "+this.id+super.toString()+" Data de Nascimento :"
-		+ ""+this.dataNascimento+"Numero Celular: "+this.numeroCelular
+		return super.toString()+"Data de Nascimento: "+this.dataNascimento+";Numero Celular: "+this.numeroCelular
 		+lugares.toString()+viagens.toString();
 	}
 }
