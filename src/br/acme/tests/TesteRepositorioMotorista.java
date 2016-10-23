@@ -1,7 +1,5 @@
 package br.acme.tests;
 
-import java.util.ArrayList;
-
 import br.acme.storage.RepositorioMotorista;
 import br.acme.users.Motorista;
 
@@ -24,42 +22,47 @@ public class TesteRepositorioMotorista {
 		
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Motorista user: repositorio.getListaMotorista()){
+			if(user==null)break;
 			System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 		}
 		System.out.println();
 		
 		// Removendo os Motoristas do repositorio ----------------------------------------------------------------------------------------------------
+	
 		repositorio.remover(2); // Motorista existe
 		repositorio.remover(5); // Motorista não existe
 		
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Motorista user: repositorio.getListaMotorista()){
+			if(user==null)break;
 			System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 		}
 		System.out.println();
 		
 		// Alterando Motoristas do repositorio ----------------------------------------------------------------------------------------------------
 		repositorio.alterar(9, motAna);// Motorista não existe
-		repositorio.alterar(6, motAna);// Motorista existe
+		repositorio.alterar(3, motAna);// Motorista existe
 		
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Motorista user: repositorio.getListaMotorista()){
+			if(user==null)break;
 			System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 		}
 		System.out.println();
 		
 		// Buscando um Motorista ----------------------------------------------------------------------------------------------------
-		System.out.println("O Motorista #5 é: "+repositorio.buscar(5).getNome()+"("+repositorio.buscar(5).getEmail()+")\n");
+		System.out.println("O Motorista #1 é: "+repositorio.buscar(1).getNome()+"("+repositorio.buscar(1).getEmail()+")\n");
 		
 		// Retornando a lista de Motoristas ----------------------------------------------------------------------------------------------------
-		ArrayList<Motorista> lista = repositorio.buscarTodos();
+		Motorista[] lista = repositorio.buscarTodos();
 		
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Motorista user: lista){
+			if(user==null)break;
 			System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 		}
 		System.out.println();
-
+	/**/
 	}
-
+	
 }

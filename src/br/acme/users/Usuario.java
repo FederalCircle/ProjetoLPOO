@@ -3,7 +3,7 @@ package br.acme.users;
 public class Usuario {
 	//Atributos-----------------------------------------------------------------------------------------------------
 	private long id;
-	private static long idIncrement=1;
+	private static long idIncrement=0;
 	private String cpf;
 	private String nome;
 	private String senha;
