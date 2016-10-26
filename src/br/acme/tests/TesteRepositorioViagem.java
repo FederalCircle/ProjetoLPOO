@@ -1,6 +1,5 @@
 package br.acme.tests;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import br.acme.storage.RepositorioViagem;
@@ -45,6 +44,7 @@ public class TesteRepositorioViagem {
 		
 		System.out.println("ID\t\tOrigem\t\tDestino");
 		for(Viagem travel: repositorio.getListaViagem()){
+			if(travel==null)break;
 			System.out.println("#"+travel.getId()+"\t\t"+travel.getOrigem().getEndereco()+"\t\t"+travel.getDestino().getEndereco());
 		}
 		System.out.println();
@@ -55,6 +55,7 @@ public class TesteRepositorioViagem {
 		
 		System.out.println("ID\t\tOrigem\t\tDestino");
 		for(Viagem travel: repositorio.getListaViagem()){
+			if(travel==null)break;
 			System.out.println("#"+travel.getId()+"\t\t"+travel.getOrigem().getEndereco()+"\t\t"+travel.getDestino().getEndereco());
 		}
 		System.out.println();
@@ -63,10 +64,11 @@ public class TesteRepositorioViagem {
 		System.out.println("O Viagem #3 foi de ("+repositorio.buscar(3).getOrigem().getEndereco()+") até ("+repositorio.buscar(3).getDestino().getEndereco()+")\n");
 		
 		// Retornando a lista de Viagems ----------------------------------------------------------------------------------------------------
-		ArrayList<Viagem> lista = repositorio.buscarTodos();
+		Viagem[] lista = repositorio.buscarTodos();
 		
 		System.out.println("ID\t\tOrigem\t\tDestino");
 		for(Viagem travel: lista){
+			if(travel==null)break;
 			System.out.println("#"+travel.getId()+"\t\t"+travel.getOrigem().getEndereco()+"\t\t"+travel.getDestino().getEndereco());
 		}
 		System.out.println();

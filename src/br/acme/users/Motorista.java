@@ -4,7 +4,7 @@ import br.acme.location.*;
 public class Motorista extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private boolean disponivel;
-	Viagem[] viagens = new Viagem[10];
+	private Viagem[] viagens = new Viagem[10];
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Motorista(String cpf, String nome, String senha, String email, String sexo, boolean disponivel) {

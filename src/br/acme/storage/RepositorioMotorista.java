@@ -1,5 +1,4 @@
 package br.acme.storage;
-
 import br.acme.users.Motorista;
 
 public class RepositorioMotorista {

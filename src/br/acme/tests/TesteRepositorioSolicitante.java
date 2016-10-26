@@ -1,7 +1,6 @@
 package br.acme.tests;
 
 import java.util.Date;
-import java.util.ArrayList;
 
 import br.acme.users.Solicitante;
 import br.acme.storage.RepositorioSolicitante;
@@ -26,6 +25,7 @@ public class TesteRepositorioSolicitante {
 		
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Solicitante user: repositorio.getListaSolicitante()){
+			if(user==null)break;
 			System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 		}
 		System.out.println();
@@ -36,6 +36,7 @@ public class TesteRepositorioSolicitante {
 		
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Solicitante user: repositorio.getListaSolicitante()){
+			if(user==null)break;
 			System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 		}
 		System.out.println();
@@ -46,6 +47,7 @@ public class TesteRepositorioSolicitante {
 		
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Solicitante user: repositorio.getListaSolicitante()){
+			if(user==null)break;
 			System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 		}
 		System.out.println();
@@ -54,10 +56,11 @@ public class TesteRepositorioSolicitante {
 		System.out.println("O solicitante #2 é: "+repositorio.buscar(2).getNome()+"("+repositorio.buscar(2).getEmail()+")\n");
 		
 		// Retornando a lista de solicitantes ----------------------------------------------------------------------------------------------------
-		ArrayList<Solicitante> lista = repositorio.buscarTodos();
+		Solicitante[] lista = repositorio.buscarTodos();
 		
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Solicitante user: lista){
+			if(user==null)break;
 			System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 		}
 		System.out.println();
