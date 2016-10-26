@@ -2,7 +2,7 @@ package br.acme.users;
 import java.util.Date;
 
 import br.acme.location.*;
-
+import br.acme.storage.*;
 public class Solicitante extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Date dataNascimento = new Date();
@@ -53,7 +53,13 @@ public class Solicitante extends Usuario {
 	}	
 	
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void solicitarCarona(){
+	public void solicitarCarona(RepositorioMotorista repositorio){
+		for(Motorista motor : repositorio.buscarTodos()){
+			if(motor.getDisponivel()== true){ 
+				motor.responderPedido();
+				break;		
+			}
+		}
 		
 	}
 	
@@ -65,7 +71,6 @@ public class Solicitante extends Usuario {
 		
 	}
 	public String toString(){
-		return super.toString()+"Data de Nascimento: "+this.dataNascimento+";Numero Celular: "+this.numeroCelular
-		+lugares.toString()+viagens.toString();
+		return super.toString()+"Data de Nascimento: "+this.dataNascimento+";Numero Celular: "+this.numeroCelular;
 	}
 }
