@@ -1,8 +1,9 @@
 package br.acme.users;
+import br.acme.storage.RepositorioMotorista;
 
 public class Gerente extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
-		//Todos os atributos estão na superClasse
+		private RepositorioMotorista repMotor = new RepositorioMotorista();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Gerente(String cpf, String nome, String senha, String email, String sexo){
@@ -15,15 +16,20 @@ public class Gerente extends Usuario {
 
 	// Métodos ----------------------------------------------------------------------------------------------------
 	public void cadastrarMotorista(Motorista newbie){
-		
+		repMotor.adicionar(newbie);
 	}
 	
 	public void removerMotorista(long id){
-		
+		repMotor.remover(id);
 	}
 	
 	public void listarMotoristas(){
-		
+		System.out.println("Nome\tEmail");
+		for(Motorista motor : repMotor.buscarTodos()){
+			if(motor==null) break;
+			System.out.println(motor.getNome()+"\t"+motor.getEmail());
+		}
+		System.out.println();
 	}
 	
 	public void listarClientes(){
