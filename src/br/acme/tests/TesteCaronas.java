@@ -10,6 +10,8 @@ public class TesteCaronas {
 	
 	public static void main(String[] args) {
 		Date dataNascimento = new Date();// necessário para Solicitante
+		Date hora = new Date();
+		
 		
 /*Solicitantes, Motoristas e Viagens são necessários para Viagem*/
 		// Criando o repositório ----------------------------------------------------------------------------------------------------

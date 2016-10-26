@@ -64,7 +64,8 @@ public class Solicitante extends Usuario {
 	}
 	
 	public void cancelarCarona(){
-		
+		Date hora = new Date();
+		hora.getTime();
 	}
 	
 	public void historico(){
