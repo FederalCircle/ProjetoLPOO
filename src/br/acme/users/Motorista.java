@@ -10,11 +10,11 @@ public class Motorista extends Usuario {
 	public Motorista(String cpf, String nome, String senha, String email, String sexo, boolean disponivel) {
 		// Contrutor da superClasse
 		super(cpf,nome,senha,email,sexo);
-		this.disponivel = disponivel;
+		this.disponivel = true;
 	}
 
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
-	public boolean isDisponivel() {
+	public boolean getDisponivel() {
 		return disponivel;
 	}
 
@@ -31,10 +31,10 @@ public class Motorista extends Usuario {
 	}
 
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void responderPedido(boolean resposta){
-		if(resposta){
-			
-		}
+	public void responderPedido(){
+		this.disponivel= false;
+		
+		System.out.println(this.getNome()+" aceitou sua viagem (disponibilidade = "+this.disponivel+")");
 	}
 	
 	public void historico(){
@@ -42,6 +42,6 @@ public class Motorista extends Usuario {
 	}
 	
 	public String toString(){
-		return super.toString()+"Status: "+this.disponivel+viagens.toString();
+		return super.toString()+"Status: "+this.disponivel;
 	}
 }

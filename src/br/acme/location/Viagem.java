@@ -88,8 +88,7 @@ public class Viagem {
 	//metodos--------------------------------------------------------------------------------------------
 	
 	public String toString(){
-		return "ID: "+this.id+";"+cliente.toString()+motorista.toString()+
-				origem.toString()+destino.toString()+"Valor da viagem: "
+		return "ID: "+this.id+";"+"Valor da viagem: "
 				+this.valorViagem+";Forma de Pagamento: "+this.formaPagamento+";";
 	}
 	
