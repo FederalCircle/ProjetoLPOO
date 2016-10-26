@@ -1,10 +1,10 @@
 package br.acme.users;
-import br.acme.location.*;
+import br.acme.storage.RepositorioViagem;
 
 public class Motorista extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private boolean disponivel;
-	private Viagem[] viagens = new Viagem[10];
+	private RepositorioViagem viagens = new RepositorioViagem();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Motorista(String cpf, String nome, String senha, String email, String sexo, boolean disponivel) {
@@ -22,11 +22,11 @@ public class Motorista extends Usuario {
 		this.disponivel = disponivel;
 	}
 
-	public Viagem[] getViagens() {
+	public RepositorioViagem getViagens() {
 		return viagens;
 	}
 
-	public void setViagens(Viagem[] viagens) {
+	public void setViagens(RepositorioViagem viagens) {
 		this.viagens = viagens;
 	}
 
