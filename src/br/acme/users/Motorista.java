@@ -1,5 +1,8 @@
 package br.acme.users;
 import br.acme.storage.RepositorioViagem;
+import br.acme.location.*;
+import br.acme.users.Solicitante;
+import java.util.Random;
 
 public class Motorista extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
@@ -14,7 +17,7 @@ public class Motorista extends Usuario {
 	}
 
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
-	public boolean getDisponivel() {
+	public boolean isDisponivel() {
 		return disponivel;
 	}
 
@@ -31,17 +34,29 @@ public class Motorista extends Usuario {
 	}
 
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void responderPedido(){
-		this.disponivel= false;
-		
-		System.out.println(this.getNome()+" aceitou sua viagem (disponibilidade = "+this.disponivel+")");
+	public Viagem responderPedido(Solicitante cliente, Lugar inicio, Lugar fim, String formaPagamento){
+		disponivel = false;
+		Random preco = new Random();
+		Viagem travel = new Viagem(cliente, this, inicio, fim, preco.nextInt(101)+50, formaPagamento);
+		viagens.adicionar(travel);
+		System.out.println(cliente.getNome()+", motorista "+this.getNome()+" aceitou sua viagem");
+		return travel;
 	}
 	
 	public void historico(){
-		
+		System.out.println("Histórico de viagens ("+this.getNome()+")");
+		for(Viagem travel: viagens.buscarTodos()){
+			if(travel==null) break;
+			System.out.println("ID: "+travel.getId());
+			System.out.println("Origem: "+travel.getOrigem().getEndereco());
+			System.out.println("Destino: "+travel.getDestino().getEndereco());
+			System.out.println("Cliente: "+travel.getCliente().getNome());
+			System.out.println("Preço: "+travel.getValorViagem());
+		}
+		System.out.println();
 	}
 	
 	public String toString(){
-		return super.toString()+"Status: "+this.disponivel;
+		return super.toString()+"Disponível: "+this.disponivel;
 	}
 }

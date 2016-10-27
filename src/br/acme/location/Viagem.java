@@ -1,6 +1,7 @@
 package br.acme.location;
 import br.acme.users.Motorista;
-import br.acme.users.Solicitante;;
+import br.acme.users.Solicitante;
+import java.util.Date;
 
 public class Viagem {
 	// Atributos ----------------------------------------------------------------------------------------------------
@@ -13,6 +14,7 @@ public class Viagem {
 	private Lugar destino;
 	private double valorViagem;
 	private String formaPagamento;
+	private Date horaPedido;
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Viagem(Solicitante cliente, Motorista motorista, Lugar origem, Lugar destino, double valorViagem, String formaPagamento) {
@@ -26,6 +28,7 @@ public class Viagem {
 		this.destino = destino;
 		this.valorViagem = valorViagem;
 		this.formaPagamento = formaPagamento;
+		horaPedido=new Date();
 	}
 
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
@@ -85,11 +88,15 @@ public class Viagem {
 		this.formaPagamento = formaPagamento;
 	}
 	
+	public Date getHoraPedido(){
+		return horaPedido;
+	}
+	
 	//metodos--------------------------------------------------------------------------------------------
 	
 	public String toString(){
 		return "ID: "+this.id+";"+"Valor da viagem: "
-				+this.valorViagem+";Forma de Pagamento: "+this.formaPagamento+";";
+				+this.valorViagem+";Forma de Pagamento: "+this.formaPagamento+";Data do Pedido: "+this.horaPedido+";";
 	}
 	
 }

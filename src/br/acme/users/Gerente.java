@@ -4,17 +4,18 @@ import br.acme.storage.*;
 
 public class Gerente extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
-		private RepositorioMotorista repMotor;
+		private RepositorioMotorista repMotor = new RepositorioMotorista();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
-	public Gerente(String cpf, String nome, String senha, String email, String sexo,RepositorioMotorista repmotor){
+	public Gerente(String cpf, String nome, String senha, String email, String sexo){
 		// Construtor da superClasse
 		super(cpf,nome,senha,email,sexo);
-		this.repMotor = repmotor;
 	}
 
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
-		// Getters and Setters estão na superClasse
+	public RepositorioMotorista getRepMotor(){
+		return repMotor;
+	}
 
 	// Métodos ----------------------------------------------------------------------------------------------------
 	public void cadastrarMotorista(Motorista newbie){

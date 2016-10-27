@@ -22,12 +22,12 @@ public class TesteSolicitante {
 				+ "\nData de nascimento: "+ userPaula.getDataNascimento());
 		
 		// Alterando as informações ----------------------------------------------------------------------------------------------------
-		userPaula.setNome(userPaula.getNome()+" Fernandes");
-		userPaula.setSenha("abc");
-		userPaula.setCpf("222.222.222-22");
-		userPaula.setEmail("paula_tejando@user.com");
-		userPaula.setNumeroCelular(988776655);
-		userPaula.setSexo("Feminino^2");
+		userPaula.setNome(userPaula.getNome()+" Fernandes", "123");
+		userPaula.setSenha("abc", "123");
+		userPaula.setCpf("222.222.222-22", "abc");
+		userPaula.setEmail("paula_fernandes@user.com", "abc");
+		userPaula.setNumeroCelular(988776655, "abc");
+		userPaula.setSexo("Feminino^2", "123");//Senha Errada
 		
 		// Exibindo as informações ----------------------------------------------------------------------------------------------------
 				System.out.println("\nInformações do usuário..."
