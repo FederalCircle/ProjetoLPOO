@@ -58,9 +58,12 @@ public class TesteCaronas {
 		
 		//Listando todas as viagens feitas
 		for(Motorista motor: gerente.getRepMotor().getListaMotorista()){
-			if(motor==null) break;
+			try{if(motor==null) break;
 			motor.historico();
+			}catch(Exception e){
+				System.out.println(e.getMessage());
 			}
+		 }
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
