@@ -3,6 +3,7 @@ import java.util.Date;
 
 import br.acme.location.*;
 import br.acme.storage.*;
+import br.acme.exception.*;
 public class Solicitante extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Date dataNascimento = new Date();
@@ -73,7 +74,7 @@ public class Solicitante extends Usuario {
 	}
 	
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void solicitarCarona(RepositorioMotorista repositorio, Lugar inicio, Lugar fim, String formaPagamento){
+	public void solicitarCarona(RepositorioMotorista repositorio, Lugar inicio, Lugar fim, String formaPagamento) throws RepositorioException{
 		for(Motorista motor : repositorio.buscarTodos()){
 			if(motor.isDisponivel()== true){ 
 				viagens.adicionar(motor.responderPedido(this, inicio, fim, formaPagamento));
@@ -84,7 +85,7 @@ public class Solicitante extends Usuario {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void cancelarCarona(){
+	public void cancelarCarona()throws RepositorioException{
 		Date horaCancelamento = new Date();
 		Viagem maisRecente = null;
 		int i=0;
@@ -102,7 +103,7 @@ public class Solicitante extends Usuario {
 		System.out.println("A carona foi cancelada com sucesso. Taxa de cancelamento: "+taxa);
 	}
 	
-	public void historico(){
+	public void historico()throws RepositorioException{
 		System.out.println("Histórico de viagens ("+this.getNome()+")");
 		for(Viagem travel: viagens.buscarTodos()){
 			if(travel==null) break;

@@ -16,9 +16,13 @@ public class TesteRepositorioMotorista {
 		RepositorioMotorista repositorio = new RepositorioMotorista();
 		
 		// Adicionando os Motoristas ao repositorio ----------------------------------------------------------------------------------------------------
-		repositorio.adicionar(motJose);
-		repositorio.adicionar(motAna);
-		repositorio.adicionar(motMaria);
+		try{
+			repositorio.adicionar (motJose);
+			repositorio.adicionar(motAna);
+			repositorio.adicionar(motMaria);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Motorista user: repositorio.getListaMotorista()){
@@ -28,10 +32,12 @@ public class TesteRepositorioMotorista {
 		System.out.println();
 		
 		// Removendo os Motoristas do repositorio ----------------------------------------------------------------------------------------------------
-	
+		try{
 		repositorio.remover(2); // Motorista existe
 		repositorio.remover(5); // Motorista não existe
-		
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Motorista user: repositorio.getListaMotorista()){
 			if(user==null)break;
@@ -40,9 +46,12 @@ public class TesteRepositorioMotorista {
 		System.out.println();
 		
 		// Alterando Motoristas do repositorio ----------------------------------------------------------------------------------------------------
+		try{
 		repositorio.alterar(9, motAna);// Motorista não existe
 		repositorio.alterar(3, motAna);// Motorista existe
-		
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Motorista user: repositorio.getListaMotorista()){
 			if(user==null)break;
@@ -51,17 +60,20 @@ public class TesteRepositorioMotorista {
 		System.out.println();
 		
 		// Buscando um Motorista ----------------------------------------------------------------------------------------------------
-		System.out.println("O Motorista #1 é: "+repositorio.buscar(1).getNome()+"("+repositorio.buscar(1).getEmail()+")\n");
+		try{System.out.println("O Motorista #1 é: "+repositorio.buscar(1).getNome()+"("+repositorio.buscar(1).getEmail()+")\n");
 		
 		// Retornando a lista de Motoristas ----------------------------------------------------------------------------------------------------
 		Motorista[] lista = repositorio.buscarTodos();
-		
 		System.out.println("ID\t\tNome\t\tEmail");
 		for(Motorista user: lista){
 			if(user==null)break;
 			System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 		}
-		System.out.println();
+
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+				System.out.println();
 	/**/
 	}
 	

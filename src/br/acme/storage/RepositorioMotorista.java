@@ -1,7 +1,7 @@
 package br.acme.storage;
 import br.acme.users.Motorista;
-
-public class RepositorioMotorista {
+import br.acme.exception.*;
+public class RepositorioMotorista implements IRepositorioMotorista {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Motorista[] listaMotorista = new Motorista[10];
 	
@@ -17,7 +17,7 @@ public class RepositorioMotorista {
 	}
 	
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void adicionar(Motorista novoMotorista){
+	public void adicionar(Motorista novoMotorista) throws RepositorioException{
 		/* 
 		 * Para cada elemento não nulo do Array:
 		 * 	 > Compara o ID do atual com o ID do novo:
@@ -29,7 +29,7 @@ public class RepositorioMotorista {
 		for(Motorista elemento: listaMotorista){
 			if(elemento!=null){
 				if(elemento.getId()==novoMotorista.getId())
-					break;
+					throw new RepositorioException("Ja existe um objeto com essa ID");
 				else
 					i++;
 			}
@@ -40,7 +40,7 @@ public class RepositorioMotorista {
 		}
 	}
 	
-	public void remover(long id){
+	public void remover(long id) throws RepositorioException{
 		/*
 		 * Caso qualquer elemento nulo seja encontrado, o laço é encerrado;
 		 * Se o elemento com o ID especificado seja encontrado a posição dele é igualada à null;
@@ -51,6 +51,7 @@ public class RepositorioMotorista {
 		boolean removido = false; // Varia de acordo com o sucesso do método
 		int i=0;
 		for(Motorista elemento: listaMotorista){
+			if(listaMotorista[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
 			if(elemento==null)break;
 			if(elemento.getId() == id){
 				elemento=null;
@@ -66,12 +67,13 @@ public class RepositorioMotorista {
 			System.out.println("Motorista removido com sucesso.");
 		}
 		else
-			System.out.println("Motorista não encontrado.");
+			throw new RepositorioException("Motorista não encontrado.");
 	}
 	
-	public void alterar(long id, Motorista novoMotorista){
+	public void alterar(long id, Motorista novoMotorista) throws RepositorioException{
 		boolean alterado = false; // Varia de acordo com o sucesso do método
 		int i=0;
+		if(listaMotorista[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
 		for(Motorista elemento: listaMotorista){
 			if(elemento==null)break;
 			if(elemento.getId() == id){
@@ -83,20 +85,24 @@ public class RepositorioMotorista {
 		if(alterado)
 			System.out.println("Motorista alterado com sucesso.");
 		else
-			System.out.println("Motorista não encontrado.");
+			throw new RepositorioException("Motorista não encontrado.");
 	}
 	
-	public Motorista buscar(long id){
+	public Motorista buscar(long id) throws RepositorioException{
+		if(listaMotorista[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
 		for(Motorista motorista : listaMotorista){
 			if(motorista==null)break;
 			if(motorista.getId() == id){
 				return motorista;
 			}
 		}
-		return null;
+		throw new RepositorioException("Motorista não encontrado.");
 	}
 	
-	public Motorista[] buscarTodos(){
+	public Motorista[] buscarTodos() throws RepositorioException{
+		if(listaMotorista[0]==null){
+			throw new RepositorioException("Repositorio vazio");
+		}
 		return this.getListaMotorista();
 	}
 }

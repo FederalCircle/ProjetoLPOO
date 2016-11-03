@@ -1,4 +1,5 @@
 package br.acme.users;
+import br.acme.exception.RepositorioException;
 import br.acme.storage.*;
 
 
@@ -19,15 +20,18 @@ public class Gerente extends Usuario {
 
 	// Métodos ----------------------------------------------------------------------------------------------------
 	public void cadastrarMotorista(Motorista newbie){
-		repMotor.adicionar(newbie);
+		try{repMotor.adicionar(newbie);
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void removerMotorista(long id)throws RepositorioException{
+		repMotor.remover(id);
 		
 	}
 	
-	public void removerMotorista(long id){
-		repMotor.remover(id);
-	}
-	
-	public void listarMotoristas(){
+	public void listarMotoristas() throws RepositorioException{
 		System.out.println("Nome\tEmail");
 		for(Motorista motor : repMotor.buscarTodos()){
 			if(motor==null) break;
@@ -36,7 +40,7 @@ public class Gerente extends Usuario {
 		System.out.println();
 	}
 	
-	public void listarClientes(RepositorioSolicitante lista ){
+	public void listarClientes(RepositorioSolicitante lista )throws RepositorioException{
 		System.out.println("Nome\tEmail");
 		for(Solicitante solicitante : lista.buscarTodos()){
 			if(solicitante==null) break;

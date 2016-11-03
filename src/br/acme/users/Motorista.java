@@ -1,5 +1,6 @@
 package br.acme.users;
-import br.acme.storage.RepositorioViagem;
+import br.acme.storage.*;
+import br.acme.exception.RepositorioException;
 import br.acme.location.*;
 import br.acme.users.Solicitante;
 import java.util.Random;
@@ -15,7 +16,6 @@ public class Motorista extends Usuario {
 		super(cpf,nome,senha,email,sexo);
 		this.disponivel = true;
 	}
-
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
 	public boolean isDisponivel() {
 		return disponivel;
@@ -34,7 +34,7 @@ public class Motorista extends Usuario {
 	}
 
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public Viagem responderPedido(Solicitante cliente, Lugar inicio, Lugar fim, String formaPagamento){
+	public Viagem responderPedido(Solicitante cliente, Lugar inicio, Lugar fim, String formaPagamento)throws RepositorioException{
 		disponivel = false;
 		Random preco = new Random();
 		Viagem travel = new Viagem(cliente, this, inicio, fim, preco.nextInt(101)+50, formaPagamento);
@@ -43,7 +43,7 @@ public class Motorista extends Usuario {
 		return travel;
 	}
 	
-	public void historico(){
+	public void historico()throws RepositorioException{
 		System.out.println("Histórico de viagens ("+this.getNome()+")");
 		for(Viagem travel: viagens.buscarTodos()){
 			if(travel==null) break;

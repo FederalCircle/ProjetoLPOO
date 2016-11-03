@@ -10,7 +10,7 @@ public class TesteCaronas {
 	
 	public static void main(String[] args) {
 		Date dataNascimento = new Date();// necessário para Solicitante
-		
+		try{
 		// Criando o repositório de solicitantes
 		RepositorioSolicitante repSolicitante = new RepositorioSolicitante();
 		
@@ -40,10 +40,13 @@ public class TesteCaronas {
 		repSolicitante.adicionar(solAndre);
 		
 		//Solicitando as caronas
+		try{
 		solPaula.solicitarCarona(gerente.getRepMotor(), inicio, fim, "Cartão");
 		solPedro.solicitarCarona(gerente.getRepMotor(), inicio, fim, "à Vista");
 		solAndre.solicitarCarona(gerente.getRepMotor(), inicio, fim, "Cheque");
-		
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		//Listando todas as viagens feitas
 		for(Motorista motor: gerente.getRepMotor().getListaMotorista()){
 			if(motor==null) break;
@@ -57,7 +60,9 @@ public class TesteCaronas {
 		for(Motorista motor: gerente.getRepMotor().getListaMotorista()){
 			if(motor==null) break;
 			motor.historico();
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
 		}
-		
 	}
 }

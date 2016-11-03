@@ -1,7 +1,7 @@
 package br.acme.storage;
 import br.acme.location.Viagem;
-
-public class RepositorioViagem {
+import br.acme.exception.*;
+public class RepositorioViagem implements IRepositorioViagem{
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Viagem[] listaViagem = new Viagem[10];
 	
@@ -17,7 +17,7 @@ public class RepositorioViagem {
 	}
 	
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void adicionar(Viagem novoViagem){
+	public void adicionar(Viagem novoViagem)throws RepositorioException{
 		/* 
 		 * Para cada elemento não nulo do Array:
 		 * 	 > Compara o ID do atual com o ID do novo:
@@ -29,7 +29,7 @@ public class RepositorioViagem {
 		for(Viagem elemento: listaViagem){
 			if(elemento!=null){
 				if(elemento.getId()==novoViagem.getId())
-					break;
+					throw new RepositorioException("JA há uma viagem com essa ID");
 				else
 					i++;
 			}
@@ -40,7 +40,7 @@ public class RepositorioViagem {
 		}
 	}
 	
-	public void remover(long id){
+	public void remover(long id) throws RepositorioException{
 		/*
 		 * Caso qualquer elemento nulo seja encontrado, o laço é encerrado;
 		 * Se o elemento com o ID especificado seja encontrado a posição dele é igualada à null;
@@ -50,6 +50,7 @@ public class RepositorioViagem {
 		 */
 		boolean removido = false; // Varia de acordo com o sucesso do método
 		int i=0;
+		if(listaViagem[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
 		for(Viagem elemento: listaViagem){
 			if(elemento==null)break;
 			if(elemento.getId() == id){
@@ -66,20 +67,24 @@ public class RepositorioViagem {
 			System.out.println("Viagem removido com sucesso.");
 		}
 		else
-			System.out.println("Viagem não encontrado.");
+			throw new RepositorioException("A viagem nao foi encontrada");
 	}
 
-	public Viagem buscar(long id){
+	public Viagem buscar(long id)throws RepositorioException{
+		if(listaViagem[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
 		for(Viagem viagem : listaViagem){
 			if(viagem==null)break;
 			if(viagem.getId() == id){
 				return viagem;
 			}
 		}
-		return null;
+		throw new RepositorioException("A viagem nao foi emcontrada");
 	}
 	
-	public Viagem[] buscarTodos(){
+	public Viagem[] buscarTodos()throws RepositorioException{
+		if(listaViagem[0]==null){
+			throw new RepositorioException("o Repositorio esta Vazio");
+		}
 		return this.getListaViagem();
 	}
 }

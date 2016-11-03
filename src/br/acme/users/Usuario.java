@@ -1,6 +1,6 @@
 package br.acme.users;
 
-public class Usuario {
+public abstract class Usuario {
 	//Atributos-----------------------------------------------------------------------------------------------------
 	private long id;
 	private static long idIncrement=0;

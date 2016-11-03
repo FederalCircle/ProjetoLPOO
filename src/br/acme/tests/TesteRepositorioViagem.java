@@ -12,7 +12,7 @@ public class TesteRepositorioViagem {
 
 	public static void main(String[] args) {
 		Date dataNascimento = new Date();// necessário para Solicitante
-		
+		try{
 /*Solicitantes, Motoristas e Viagens são necessários para Viagem*/
 		// Criando os solicitantes
 		Solicitante solPaula = new Solicitante("111.111.111-11", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, 99112233);
@@ -74,7 +74,9 @@ public class TesteRepositorioViagem {
 		System.out.println();
 		System.out.println(travel1.toString());
 
-
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
