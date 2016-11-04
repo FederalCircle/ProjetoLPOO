@@ -5,7 +5,7 @@ import br.acme.storage.*;
 
 public class Gerente extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
-		private RepositorioMotorista repMotor = new RepositorioMotorista();
+		private IRepositorioMotorista repMotor = new RepositorioMotorista();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Gerente(String cpf, String nome, String senha, String email, String sexo){
@@ -14,7 +14,7 @@ public class Gerente extends Usuario {
 	}
 
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
-	public RepositorioMotorista getRepMotor(){
+	public IRepositorioMotorista getRepMotor(){
 		return repMotor;
 	}
 
@@ -40,7 +40,7 @@ public class Gerente extends Usuario {
 		System.out.println();
 	}
 	
-	public void listarClientes(RepositorioSolicitante lista )throws RepositorioException{
+	public void listarClientes(IRepositorioSolicitante lista )throws RepositorioException{
 		System.out.println("Nome\tEmail");
 		for(Solicitante solicitante : lista.buscarTodos()){
 			if(solicitante==null) break;

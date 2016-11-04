@@ -9,7 +9,7 @@ public class Solicitante extends Usuario {
 	private Date dataNascimento = new Date();
 	private int numeroCelular;
 	private Lugar[] lugares = new Lugar[10];
-	private RepositorioViagem viagens = new RepositorioViagem();
+	private IRepositorioViagem viagens = new RepositorioViagem();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Solicitante(String cpf, String email, String senha, String nome, String sexo, Date dataNascimento, int numeroCelular) {
@@ -45,11 +45,11 @@ public class Solicitante extends Usuario {
 		if(getSenha().equals(senha)) this.lugares = lugares;
 	}
 
-	public RepositorioViagem getViagens() {
+	public IRepositorioViagem getViagens() {
 		return viagens;
 	}
 
-	public void setViagens(RepositorioViagem viagens, String senha) {
+	public void setViagens(IRepositorioViagem viagens, String senha) {
 		if(getSenha().equals(senha)) this.viagens = viagens;
 	}
 	
@@ -74,7 +74,7 @@ public class Solicitante extends Usuario {
 	}
 	
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void solicitarCarona(RepositorioMotorista repositorio, Lugar inicio, Lugar fim, String formaPagamento) throws RepositorioException{
+	public void solicitarCarona(IRepositorioMotorista repositorio, Lugar inicio, Lugar fim, String formaPagamento) throws RepositorioException{
 		for(Motorista motor : repositorio.buscarTodos()){
 			if(motor.isDisponivel()== true){ 
 				viagens.adicionar(motor.responderPedido(this, inicio, fim, formaPagamento));
