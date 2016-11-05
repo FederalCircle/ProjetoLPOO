@@ -12,7 +12,7 @@ public class TesteCaronas {
 		Date dataNascimento = new Date();// necessário para Solicitante
 		try{
 		// Criando o repositório de solicitantes
-		RepositorioSolicitante repSolicitante = new RepositorioSolicitante();
+		IRepositorioSolicitante repSolicitante = new RepositorioSolicitante();
 		
 		// Criando o gerente 
 		Gerente gerente = new Gerente("888.888.888-88","gerente","gerente123","gerente@gerente.com","Masculino");
@@ -50,6 +50,7 @@ public class TesteCaronas {
 		//Listando todas as viagens feitas
 		for(Motorista motor: gerente.getRepMotor().getListaMotorista()){
 			if(motor==null) break;
+			
 			motor.historico();
 		}
 		

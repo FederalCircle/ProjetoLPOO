@@ -8,7 +8,7 @@ import java.util.Random;
 public class Motorista extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private boolean disponivel;
-	private RepositorioViagem viagens = new RepositorioViagem();
+	private IRepositorioViagem viagens = new RepositorioViagem();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Motorista(String cpf, String nome, String senha, String email, String sexo, boolean disponivel) {
@@ -25,7 +25,7 @@ public class Motorista extends Usuario {
 		this.disponivel = disponivel;
 	}
 
-	public RepositorioViagem getViagens() {
+	public IRepositorioViagem getViagens() {
 		return viagens;
 	}
 
