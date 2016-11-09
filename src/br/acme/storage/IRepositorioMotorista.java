@@ -1,7 +1,7 @@
 package br.acme.storage;
 
 import br.acme.exception.RepositorioException;
-import br.acme.users.*;
+import br.acme.users.Motorista;
 public interface IRepositorioMotorista {
 		public Motorista[] getListaMotorista();
 		public void setListaMotorista(Motorista[] listaMotorista);

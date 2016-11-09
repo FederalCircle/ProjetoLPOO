@@ -1,6 +1,7 @@
 package br.acme.users;
 import br.acme.exception.RepositorioException;
 import br.acme.storage.*;
+import br.acme.exception.*;
 
 
 public class Gerente extends Usuario {
@@ -8,7 +9,7 @@ public class Gerente extends Usuario {
 		private IRepositorioMotorista repMotor = new RepositorioMotorista();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
-	public Gerente(String cpf, String nome, String senha, String email, String sexo){
+	public Gerente(String cpf, String nome, String senha, String email, String sexo) throws UsersExceptions{
 		// Construtor da superClasse
 		super(cpf,nome,senha,email,sexo);
 	}

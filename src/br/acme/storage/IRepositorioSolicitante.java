@@ -1,6 +1,6 @@
 package br.acme.storage;
 import br.acme.exception.RepositorioException;
-import br.acme.users.*;
+import br.acme.users.Solicitante;
 
 public interface IRepositorioSolicitante{
 	public Solicitante[] getListaSolicitante();

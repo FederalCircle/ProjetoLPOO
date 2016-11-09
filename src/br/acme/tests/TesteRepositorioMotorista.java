@@ -20,6 +20,7 @@ public class TesteRepositorioMotorista {
 			repositorio.adicionar (motJose);
 			repositorio.adicionar(motAna);
 			repositorio.adicionar(motMaria);
+			repositorio.adicionar(motAna);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}

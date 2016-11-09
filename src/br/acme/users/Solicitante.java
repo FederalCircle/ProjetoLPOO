@@ -12,7 +12,7 @@ public class Solicitante extends Usuario {
 	private IRepositorioViagem viagens = new RepositorioViagem();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
-	public Solicitante(String cpf, String email, String senha, String nome, String sexo, Date dataNascimento, int numeroCelular) {
+	public Solicitante(String cpf, String email, String senha, String nome, String sexo, Date dataNascimento, int numeroCelular) throws UsersExceptions{
 		// Construtor da superClasse
 		super(cpf,nome,senha,email,sexo);
 		this.dataNascimento = dataNascimento;

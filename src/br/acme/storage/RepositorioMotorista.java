@@ -1,6 +1,6 @@
 package br.acme.storage;
 import br.acme.users.Motorista;
-import br.acme.exception.*;
+import br.acme.exception.RepositorioException;
 public class RepositorioMotorista implements IRepositorioMotorista {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Motorista[] listaMotorista = new Motorista[10];
@@ -51,7 +51,7 @@ public class RepositorioMotorista implements IRepositorioMotorista {
 		boolean removido = false; // Varia de acordo com o sucesso do método
 		int i=0;
 		for(Motorista elemento: listaMotorista){
-			if(listaMotorista[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
+			if(listaMotorista[0]==null)throw new RepositorioException("O repositório está vazio.");
 			if(elemento==null)break;
 			if(elemento.getId() == id){
 				elemento=null;

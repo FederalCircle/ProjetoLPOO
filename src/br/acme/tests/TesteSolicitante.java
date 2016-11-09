@@ -6,9 +6,14 @@ public class TesteSolicitante {
 	
 	public static void main(String[] args) {
 		Date dataNascimento = new Date();
-		
+		Solicitante userPaula = new Solicitante("534.616.229-15", "paula@user.com", "123", "Paula", "Feminino", dataNascimento, 912345678);
 		// Criando um solicitante ----------------------------------------------------------------------------------------------------
-		Solicitante userPaula = new Solicitante("111.111.111-11", "paula@user.com", "123", "Paula", "Feminino", dataNascimento, 912345678);
+		try{
+			
+			Solicitante userAndre = new Solicitante("111.111.111-11", "andre@user.com", "123", "Andre", "Masculino", dataNascimento, 912345678);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		
 		// Exibindo as informações ----------------------------------------------------------------------------------------------------
 		System.out.println("Informações do usuário..."

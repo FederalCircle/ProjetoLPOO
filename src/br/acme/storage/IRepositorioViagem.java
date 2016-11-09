@@ -1,6 +1,6 @@
 package br.acme.storage;
 import br.acme.exception.RepositorioException;
-import br.acme.location.*;
+import br.acme.location.Viagem;
 public interface IRepositorioViagem {
 		public Viagem[] getListaViagem();
 		public void setListaViagem(Viagem[] listaViagem);
