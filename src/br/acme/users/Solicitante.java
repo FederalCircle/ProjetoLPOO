@@ -53,23 +53,23 @@ public class Solicitante extends Usuario {
 		if(getSenha().equals(senha)) this.viagens = viagens;
 	}
 	
-	public void setCpf(String cpf, String senha){
+	public void setCpf(String cpf, String senha) throws UsersExceptions{
 		if(getSenha().equals(senha)) setCpf(cpf);
 	}
 	
-	public void setNome(String nome, String senha){
+	public void setNome(String nome, String senha) throws UsersExceptions{
 		if(getSenha().equals(senha)) setNome(nome);
 	}
 	
-	public void setSenha(String novaSenha, String antigaSenha){
+	public void setSenha(String novaSenha, String antigaSenha) throws UsersExceptions{
 		if(getSenha().equals(antigaSenha)) setSenha(novaSenha);
 	}
 	
-	public void setEmail(String email, String senha){
+	public void setEmail(String email, String senha) throws UsersExceptions{
 		if(getSenha().equals(senha)) setEmail(email);
 	}
 	
-	public void setSexo(String sexo, String senha){
+	public void setSexo(String sexo, String senha) throws UsersExceptions{
 		if(getSenha().equals(senha)) setSexo(sexo);
 	}
 	

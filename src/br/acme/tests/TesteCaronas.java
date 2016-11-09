@@ -15,17 +15,17 @@ public class TesteCaronas {
 		IRepositorioSolicitante repSolicitante = new RepositorioSolicitante();
 		
 		// Criando o gerente 
-		Gerente gerente = new Gerente("888.888.888-88","gerente","gerente123","gerente@gerente.com","Masculino");
+		Gerente gerente = new Gerente("084.557.751-49","gerente","gerente123","gerente@gerente.com","Masculino");
 		
 		// Criando os solicitantes
-		Solicitante solPaula = new Solicitante("111.111.111-11", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, 99112233);
-		Solicitante solPedro = new Solicitante("222.222.222-22", "pedro@travel.com", "pedro123", "Pedro", "Masculino", dataNascimento, 99887755);
-		Solicitante solAndre = new Solicitante("333.333.333-33", "andre@travel.com", "andre123", "André", "Masculino", dataNascimento, 99332211);
+		Solicitante solPaula = new Solicitante("407.087.551-43", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, 99112233);
+		Solicitante solPedro = new Solicitante("450.047.226-68", "pedro@travel.com", "pedro123", "Pedro", "Masculino", dataNascimento, 99887755);
+		Solicitante solAndre = new Solicitante("084.557.751-49", "andre@travel.com", "andre123", "André", "Masculino", dataNascimento, 99332211);
 		
 		// Criando os motoristas
-		Motorista motJose = new Motorista("333.333.333-33", "Jose", "jose123", "jose@motor.com", "Masculino", true);
-		Motorista motAna = new Motorista("444.444.444-44", "Ana", "ana123", "ana@motor.com", "Feminino", true);
-		Motorista motMaria = new Motorista("555.555.555-55", "Maria", "maria123", "maria@motor.com", "Feminino", true);
+		Motorista motJose = new Motorista("450.047.226-68", "Jose", "jose123", "jose@motor.com", "Masculino", true);
+		Motorista motAna = new Motorista("084.557.751-49", "Ana", "ana123", "ana@motor.com", "Feminino", true);
+		Motorista motMaria = new Motorista("407.087.551-43", "Maria", "maria123", "maria@motor.com", "Feminino", true);
 		
 		//Criando os lugares
 		Lugar inicio = new Lugar("Praça", "Rua Alpha, 256");

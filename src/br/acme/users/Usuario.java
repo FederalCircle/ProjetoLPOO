@@ -21,10 +21,10 @@ public abstract class Usuario {
 			throw new CPFInvalidoException();
 		else 
 			this.cpf= cpf;
-		if(nome==null||nome.equals(""))throw new NullStringException("CPF"); else this.nome = nome;
-		this.senha =senha;
-		this.email = email;
-		this.sexo = sexo;		
+		if(nome==null||nome.equals(""))throw new NullStringException("Nome"); else this.nome = nome;
+		if(senha==null||senha.equals(""))throw new NullStringException("Senha"); else this.senha =senha;
+		if(email==null||email.equals(""))throw new NullStringException("Email"); else this.email = email;
+		if(sexo==null||sexo.equals(""))throw new NullStringException("Sexo"); else this.sexo = sexo;		
 	}
   
 	// Getters e Setters-----------------------------------------------------------------------------------------------
@@ -36,38 +36,43 @@ public abstract class Usuario {
 		return cpf;
 	}
 	
-	public void setCpf(String cpf){
-		this.cpf=cpf;
+	public void setCpf(String cpf) throws UsersExceptions{
+		if(cpf==null||cpf.equals(""))
+			throw new NullStringException("CPF"); 
+		else if(!validaCPF(cpf))
+			throw new CPFInvalidoException();
+		else 
+			this.cpf= cpf;
 	}
 	
 	public String getNome(){
 		return nome;
 	}
 	
-	public void setNome(String nome){
-		this.nome=nome;
+	public void setNome(String nome) throws UsersExceptions{
+		if(nome==null||nome.equals(""))throw new NullStringException("Nome"); else this.nome = nome;
 	}
 	public String getSenha(){
 		return senha;
 	}
 	
-	public void setSenha(String senha){
-		this.senha = senha;
+	public void setSenha(String senha) throws UsersExceptions{
+		if(senha==null||senha.equals(""))throw new NullStringException("Senha"); else this.senha =senha;
 	}
 	
 	public String getEmail(){
 		return email;
 	}
 	
-	public void setEmail(String email){
-		this.email=email;
+	public void setEmail(String email) throws UsersExceptions{
+		if(email==null||email.equals(""))throw new NullStringException("Email"); else this.email = email;
 	}
 	
 	public String getSexo(){
 		return sexo;
 	}
-	public void setSexo(String sexo){
-		this.sexo = sexo;
+	public void setSexo(String sexo) throws UsersExceptions{
+		if(sexo==null||sexo.equals(""))throw new NullStringException("Sexo"); else this.sexo = sexo;
 	}
 	 public long getidIncrement(){
 		 return idIncrement;

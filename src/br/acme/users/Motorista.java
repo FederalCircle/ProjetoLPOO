@@ -1,6 +1,7 @@
 package br.acme.users;
 import br.acme.storage.*;
 import br.acme.exception.RepositorioException;
+import br.acme.exception.UsersExceptions;
 import br.acme.location.*;
 import br.acme.users.Solicitante;
 import java.util.Random;
@@ -11,7 +12,7 @@ public class Motorista extends Usuario {
 	private IRepositorioViagem viagens = new RepositorioViagem();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
-	public Motorista(String cpf, String nome, String senha, String email, String sexo, boolean disponivel) {
+	public Motorista(String cpf, String nome, String senha, String email, String sexo, boolean disponivel) throws UsersExceptions {
 		// Contrutor da superClasse
 		super(cpf,nome,senha,email,sexo);
 		this.disponivel = true;
