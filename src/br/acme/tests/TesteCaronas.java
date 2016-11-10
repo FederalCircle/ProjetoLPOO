@@ -69,7 +69,7 @@ public class TesteCaronas {
 		 }
 		database.salvarEstado(gerente.getRepMotor(),"nome");
 		//database.salvarEstado(repSolicitante);
-		IRepositorioMotorista b = database.lerBaseMotorista();
+		IRepositorioMotorista b = database.lerBaseMotorista("nome");
 		for(Motorista motor: b.getListaMotorista()){
 			try{if(motor==null) break;
 			motor.historico();

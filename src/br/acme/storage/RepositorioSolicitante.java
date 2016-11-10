@@ -5,11 +5,19 @@ import br.acme.exception.RepositorioException;
 import br.acme.users.Solicitante;
 
 public class RepositorioSolicitante implements IRepositorioSolicitante,Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Solicitante[] listaSolicitante = new Solicitante[10];
+	private int id;
+	private static int idIncrement=0;
 	
-	// Construtor Padrão
-	
+	public RepositorioSolicitante(){
+		idIncrement++;
+		this.setId(idIncrement);
+	}
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
 	public Solicitante[] getListaSolicitante() {
 		return listaSolicitante;
@@ -19,6 +27,12 @@ public class RepositorioSolicitante implements IRepositorioSolicitante,Serializa
 		this.listaSolicitante = listaSolicitante;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	// Métodos ----------------------------------------------------------------------------------------------------
 	public void adicionar(Solicitante novoSolicitante)throws RepositorioException{
 		/* 

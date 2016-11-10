@@ -3,12 +3,21 @@ import java.io.*;
 
 import br.acme.location.Viagem;
 import br.acme.exception.*;
+
 public class RepositorioViagem implements IRepositorioViagem,Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Viagem[] listaViagem = new Viagem[10];
+	private int id;
+	private static int idIncrement=0;
 	
-	// Construtor Padrão
-	
+	public RepositorioViagem(){
+		idIncrement++;
+		this.setId(idIncrement);
+	}
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
 	public Viagem[] getListaViagem() {
 		return listaViagem;
@@ -18,6 +27,12 @@ public class RepositorioViagem implements IRepositorioViagem,Serializable{
 		this.listaViagem = listaViagem;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	// Métodos ----------------------------------------------------------------------------------------------------
 	public void adicionar(Viagem novoViagem)throws RepositorioException{
 		/* 

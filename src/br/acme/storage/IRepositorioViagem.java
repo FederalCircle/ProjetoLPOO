@@ -1,6 +1,4 @@
 package br.acme.storage;
-import java.io.*;
-
 import br.acme.exception.RepositorioException;
 import br.acme.location.Viagem;
 public interface IRepositorioViagem {

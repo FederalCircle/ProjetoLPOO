@@ -28,7 +28,7 @@ public class DATABASE {
 	public static void salvarEstado(IRepositorioMotorista repMotor , String nomeIRepMotor)throws IOException{
 
      try{   
-    	arquivoGrav = new FileOutputStream(nomeIRepMotor);
+    	arquivoGrav = new FileOutputStream(nomeIRepMotor+"-"+Integer.toString(repMotor.getId()));
     	objGravar = new ObjectOutputStream(arquivoGrav);
         objGravar.writeObject(repMotor);
          
@@ -128,18 +128,16 @@ public class DATABASE {
         }
 		return null;
 	}
-	public static IRepositorioMotorista lerBaseMotorista(){
+	public static IRepositorioMotorista lerBaseMotorista(String nomeArq){
 		try
-
         { 	
+			objLeitura = new ObjectInputStream(new FileInputStream(nomeArq));
 			System.out.println("ola");
 			return (IRepositorioMotorista)objLeitura.readObject();
             
         }catch( Exception e ){
-
             e.printStackTrace( );
-
-    }
+        }
 		return null;
 	}
 	public static RepositorioViagem lerBaseViagem(){

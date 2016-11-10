@@ -4,10 +4,12 @@ import java.util.Date;
 import br.acme.location.*;
 import br.acme.storage.*;
 import br.acme.exception.*;
+@SuppressWarnings("serial")
 public class Solicitante extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Date dataNascimento = new Date();
 	private int numeroCelular;
+	private double saldo;
 	private Lugar[] lugares = new Lugar[10];
 	private IRepositorioViagem viagens = new RepositorioViagem();
 	
@@ -17,6 +19,7 @@ public class Solicitante extends Usuario {
 		super(cpf,nome,senha,email,sexo);
 		this.dataNascimento = dataNascimento;
 		this.numeroCelular = numeroCelular;
+		saldo = 0;
 	}
 
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
@@ -73,11 +76,21 @@ public class Solicitante extends Usuario {
 		if(getSenha().equals(senha)) setSexo(sexo);
 	}
 	
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
 	// Métodos ----------------------------------------------------------------------------------------------------
 	public void solicitarCarona(IRepositorioMotorista repositorio, Lugar inicio, Lugar fim, String formaPagamento) throws RepositorioException{
 		for(Motorista motor : repositorio.buscarTodos()){
 			if(motor.isDisponivel()== true){ 
-				viagens.adicionar(motor.responderPedido(this, inicio, fim, formaPagamento));
+				Viagem nova = motor.responderPedido(this, inicio, fim, formaPagamento);
+				viagens.adicionar(nova);
+				this.saldo-=nova.getValorViagem();
 				break;		
 			}
 		}

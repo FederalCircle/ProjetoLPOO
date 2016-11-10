@@ -2,12 +2,21 @@ package br.acme.storage;
 import java.io.*;
 import br.acme.users.Motorista;
 import br.acme.exception.RepositorioException;
+
 public class RepositorioMotorista implements IRepositorioMotorista,Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Motorista[] listaMotorista = new Motorista[10];
-   // private static final long serialVersionUID = 664021716973805139L;  
+	private int id;
+	private static int idIncrement=0;
 	
-	// Construtor Padrão
+	public RepositorioMotorista(){
+		idIncrement++;
+		this.setId(idIncrement);
+	}
 	
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
 	public Motorista[] getListaMotorista() {
@@ -18,6 +27,14 @@ public class RepositorioMotorista implements IRepositorioMotorista,Serializable 
 		this.listaMotorista = listaMotorista;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	// Métodos ----------------------------------------------------------------------------------------------------
 	public void adicionar(Motorista novoMotorista) throws RepositorioException{
 		/* 
