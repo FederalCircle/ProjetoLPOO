@@ -1,9 +1,11 @@
 package br.acme.storage;
+import java.io.*;
 import br.acme.users.Motorista;
 import br.acme.exception.RepositorioException;
-public class RepositorioMotorista implements IRepositorioMotorista {
+public class RepositorioMotorista implements IRepositorioMotorista,Serializable {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Motorista[] listaMotorista = new Motorista[10];
+   // private static final long serialVersionUID = 664021716973805139L;  
 	
 	// Construtor Padrão
 	

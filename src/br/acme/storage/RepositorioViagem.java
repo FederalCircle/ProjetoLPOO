@@ -1,7 +1,9 @@
 package br.acme.storage;
+import java.io.*;
+
 import br.acme.location.Viagem;
 import br.acme.exception.*;
-public class RepositorioViagem implements IRepositorioViagem{
+public class RepositorioViagem implements IRepositorioViagem,Serializable{
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Viagem[] listaViagem = new Viagem[10];
 	

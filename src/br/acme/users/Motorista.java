@@ -1,12 +1,13 @@
 package br.acme.users;
 import br.acme.storage.*;
+import java.io.*;
 import br.acme.exception.RepositorioException;
 import br.acme.exception.UsersExceptions;
 import br.acme.location.*;
 import br.acme.users.Solicitante;
 import java.util.Random;
 
-public class Motorista extends Usuario {
+public class Motorista extends Usuario implements Serializable {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private boolean disponivel;
 	private IRepositorioViagem viagens = new RepositorioViagem();

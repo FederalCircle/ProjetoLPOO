@@ -1,8 +1,10 @@
 package br.acme.storage;
+import java.io.*;
+
 import br.acme.exception.RepositorioException;
 import br.acme.users.Solicitante;
 
-public class RepositorioSolicitante implements IRepositorioSolicitante {
+public class RepositorioSolicitante implements IRepositorioSolicitante,Serializable {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Solicitante[] listaSolicitante = new Solicitante[10];
 	

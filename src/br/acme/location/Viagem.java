@@ -1,9 +1,10 @@
 package br.acme.location;
+import java.io.*;
 import br.acme.users.Motorista;
 import br.acme.users.Solicitante;
 import java.util.Date;
 
-public class Viagem {
+public class Viagem implements Serializable {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	//static atributo pertence a classe entao ele ja incrementa todos os id's
 	private static long idIncrement=0;
