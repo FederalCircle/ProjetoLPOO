@@ -63,9 +63,13 @@ public class TesteCaronas {
 			DATABASE.salvarEstado(repSolicitante);
 			IRepositorioMotorista b = DATABASE.lerBaseMotorista(1);
 			for(Motorista motor: b.getListaMotorista()){
+				try{
 				if(motor==null) break;
 				motor.historico();
+			 }catch(Exception e){
+				 System.out.println(e.getMessage());
 			 }
+			}
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
