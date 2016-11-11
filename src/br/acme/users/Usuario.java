@@ -1,7 +1,8 @@
 package br.acme.users;
 import br.acme.exception.*;
-
-public abstract class Usuario {
+import java.io.*;	
+@SuppressWarnings("serial")
+public abstract class Usuario implements Serializable {
 	//Atributos-----------------------------------------------------------------------------------------------------
 	private long id;
 	private static long idIncrement=0;

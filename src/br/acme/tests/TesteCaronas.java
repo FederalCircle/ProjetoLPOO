@@ -10,7 +10,9 @@ public class TesteCaronas {
 	
 	public static void main(String[] args) {
 		Date dataNascimento = new Date();// necessário para Solicitante
+		
 		try{
+		DATABASE database = new DATABASE("teste");
 		// Criando o repositório de solicitantes
 		IRepositorioSolicitante repSolicitante = new RepositorioSolicitante();
 		
@@ -59,6 +61,16 @@ public class TesteCaronas {
 		
 		//Listando todas as viagens feitas
 		for(Motorista motor: gerente.getRepMotor().getListaMotorista()){
+			try{if(motor==null) break;
+			motor.historico();
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		 }
+		database.salvarEstado(gerente.getRepMotor(),"nome");
+		//database.salvarEstado(repSolicitante);
+		IRepositorioMotorista b = database.lerBaseMotorista("nome");
+		for(Motorista motor: b.getListaMotorista()){
 			try{if(motor==null) break;
 			motor.historico();
 			}catch(Exception e){

@@ -1,6 +1,6 @@
 package br.acme.location;
-
-public class Lugar {
+import java.io.*;
+public class Lugar implements Serializable {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private String identificadorLugar;
 	private String endereco;
