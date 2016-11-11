@@ -1,6 +1,5 @@
 package br.acme.storage;
 import br.acme.users.*;
-import br.acme.storage.*;
 import java.io.*;
 
 public class DATABASE {
@@ -8,143 +7,65 @@ public class DATABASE {
 	static String nomeIRepViagem= "repViagem";
 	static String nomeIRepSolic= "repSolic";
 	static String nomeArqGerente= "gerente";
-	static FileOutputStream arquivoGrav;
-	static ObjectOutputStream objGravar;
-	static FileInputStream arquivoLeitura;
-	static ObjectInputStream objLeitura;
+	static FileOutputStream arqGrv;
+	static ObjectOutputStream objGrv;
+	static FileInputStream arqLer;
+	static ObjectInputStream objLer;
 
-
-	public DATABASE(String nome)throws Exception{
-		arquivoGrav = new FileOutputStream(nomeIRepMotor);
-		objGravar = new ObjectOutputStream(arquivoGrav);
-		arquivoGrav = new FileOutputStream(nomeArqGerente);
-		objGravar = new ObjectOutputStream(arquivoGrav);
-		
-		arquivoLeitura = new FileInputStream(nome);
-		objLeitura= new ObjectInputStream(arquivoLeitura);		
-
+	private static String geraNome(Object obj, int id){
+		return obj.getClass().getSimpleName()+"-"+id;
 	}
 	
-	public static void salvarEstado(IRepositorioMotorista repMotor , String nomeIRepMotor)throws IOException{
-
-     try{   
-    	arquivoGrav = new FileOutputStream(nomeIRepMotor+"-"+Integer.toString(repMotor.getId()));
-    	objGravar = new ObjectOutputStream(arquivoGrav);
-        objGravar.writeObject(repMotor);
-         
-        objGravar.flush();
-        
-        objGravar.close();
-        
-        arquivoGrav.flush();
-        
-        arquivoGrav.close();
-        System.out.println("Repositorio gravado com sucesso!");
-	}   catch( Exception e ){
-
-            e.printStackTrace( );
-
-    }
-
-
+	private static void gravarDados(Object obj , int id){
+		try{
+			arqGrv = new FileOutputStream(geraNome(obj, id));
+	    	objGrv = new ObjectOutputStream(arqGrv);
+	        objGrv.writeObject(obj);	         
+	        objGrv.flush(); objGrv.close();	        
+	        arqGrv.flush(); arqGrv.close();
+	        System.out.println("Repositório salvo com sucesso!");
+		} catch(IOException e){
+			System.out.println("Erro ao tentar salvar o Repositório.");
+		}
 	}
-	public static void salvarEstado(IRepositorioSolicitante repSolic, String nomeIRepSolic){
-	     try{
-	    	arquivoGrav = new FileOutputStream(nomeIRepSolic);
-	 		objGravar = new ObjectOutputStream(arquivoGrav);
-	        
-	 		objGravar.writeObject(repSolic);
-	         
-	        objGravar.flush();
-	        
-	        objGravar.close();
-	        
-	        arquivoGrav.flush();
-	        
-	        arquivoGrav.close();
-	        System.out.println("Repositorio gravado com sucesso!");
-		}   catch( Exception e ){
-
-	            e.printStackTrace( );
-
-	    }	
+	
+	public static void salvarEstado(IRepositorioMotorista repMotor){
+    	DATABASE.gravarDados(repMotor, repMotor.getId());
 	}
-	public static void salvarEstado(IRepositorioViagem repViagem, String nomeIRepViagem){
-	     try{
-	    	arquivoGrav = new FileOutputStream(nomeIRepViagem);
-	 		objGravar = new ObjectOutputStream(arquivoGrav);
-	        objGravar.writeObject(repViagem);
-	         
-	        objGravar.flush();
-	        
-	        objGravar.close();
-	        
-	        arquivoGrav.flush();
-	        
-	        arquivoGrav.close();
-	        System.out.println("Gerente gravado com sucesso!");
-		}   catch( Exception e ){
-
-	            e.printStackTrace( );
-
-	    }
+	public static void salvarEstado(IRepositorioSolicitante repSolic){
+		DATABASE.gravarDados(repSolic, repSolic.getId());
 	}
-	public static void salvarEstado(Gerente gerente, String nomeArqGerente){
-	     try{
-	    	arquivoGrav = new FileOutputStream(nomeArqGerente);
-	 		objGravar = new ObjectOutputStream(arquivoGrav);
-	 		
-	    	 
-	        objGravar.writeObject(gerente);
-	         
-	        objGravar.flush();
-	        
-	        objGravar.close();
-	        
-	        arquivoGrav.flush();
-	        
-	        arquivoGrav.close();
-	        System.out.println("Repositorio gravado com sucesso!");
-		}   catch( Exception e ){
-
-	            e.printStackTrace( );
-
-	    }
+	public static void salvarEstado(IRepositorioViagem repViagem){
+		DATABASE.gravarDados(repViagem, repViagem.getId());
 	}
-	public static RepositorioSolicitante lerBaseSolicitante(){
-		 try
-
-	        { 
-	            System.out.println(objLeitura.toString());
-
-	            objLeitura.close();
-
-	            arquivoLeitura.close();
-
-	        }catch( Exception e ){
-
-                e.printStackTrace( );
-
-        }
-		return null;
+	public static void salvarEstado(Gerente gerente){
+		DATABASE.gravarDados(gerente, (int)gerente.getId());
 	}
-	public static IRepositorioMotorista lerBaseMotorista(String nomeArq){
+	
+	// -------------------------------------------------------
+	
+	private static Object lerDados(String nomeArq){
 		try
         { 	
-			objLeitura = new ObjectInputStream(new FileInputStream(nomeArq));
-			System.out.println("ola");
-			return (IRepositorioMotorista)objLeitura.readObject();
-            
+			objLer = new ObjectInputStream(new FileInputStream(nomeArq));
+			return objLer.readObject();
         }catch( Exception e ){
             e.printStackTrace( );
+            return null;
         }
-		return null;
 	}
-	public static RepositorioViagem lerBaseViagem(){
-		return null;
+	
+	public static RepositorioSolicitante lerBaseSolicitante(int id){
+		return (RepositorioSolicitante) lerDados("RepositorioSolicitante -"+id);
 	}
-	public static Gerente lerBaseGerente(){
-		return null;
+	public static RepositorioMotorista lerBaseMotorista(int id){
+		return (RepositorioMotorista) lerDados("RepositorioSolicitante -"+id);
+	}
+	public static RepositorioViagem lerBaseViagem(int id){
+		return (RepositorioViagem) lerDados("RepositorioSolicitante -"+id);
+	}
+	public static Gerente lerBaseGerente(int id){
+		return (Gerente) lerDados("RepositorioSolicitante -"+id);
 	}
 	
 }

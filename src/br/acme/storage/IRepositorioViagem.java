@@ -8,4 +8,5 @@ public interface IRepositorioViagem {
 		public void remover(long id) throws RepositorioException;
 		public Viagem buscar(long id) throws RepositorioException;
 		public Viagem[] buscarTodos() throws RepositorioException;
+		public int getId();
 }

@@ -10,4 +10,5 @@ public interface IRepositorioSolicitante{
 	public void alterar(long id, Solicitante novosolicitante)throws RepositorioException;
 	public Solicitante buscar(long id)throws RepositorioException;
 	public Solicitante[] buscarTodos()throws RepositorioException;
+	public int getId();
 }
