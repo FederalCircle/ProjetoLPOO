@@ -129,6 +129,6 @@ public class Solicitante extends Usuario {
 		System.out.println();
 	}
 	public String toString(){
-		return super.toString()+"Data de Nascimento: "+this.dataNascimento+";Numero Celular: "+this.numeroCelular;
+		return super.toString()+"Data de Nascimento: "+this.dataNascimento+";Numero Celular: "+this.numeroCelular+";Saldo: "+this.saldo+";";
 	}
 }

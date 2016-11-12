@@ -3,7 +3,7 @@ import br.acme.exception.RepositorioException;
 import br.acme.storage.*;
 import br.acme.exception.*;
 
-
+@SuppressWarnings("serial")
 public class Gerente extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
 		private IRepositorioMotorista repMotor = new RepositorioMotorista();

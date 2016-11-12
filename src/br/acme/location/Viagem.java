@@ -4,6 +4,7 @@ import br.acme.users.Motorista;
 import br.acme.users.Solicitante;
 import java.util.Date;
 
+@SuppressWarnings("serial")
 public class Viagem implements Serializable {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	//static atributo pertence a classe entao ele ja incrementa todos os id's

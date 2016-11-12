@@ -1,5 +1,6 @@
 package br.acme.location;
 import java.io.*;
+@SuppressWarnings("serial")
 public class Lugar implements Serializable {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private String identificadorLugar;

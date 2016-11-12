@@ -7,6 +7,7 @@ import br.acme.location.*;
 import br.acme.users.Solicitante;
 import java.util.Random;
 
+@SuppressWarnings("serial")
 public class Motorista extends Usuario implements Serializable {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private boolean disponivel;
@@ -59,6 +60,6 @@ public class Motorista extends Usuario implements Serializable {
 	}
 	
 	public String toString(){
-		return super.toString()+"Disponível: "+this.disponivel;
+		return super.toString()+"Disponível: "+this.disponivel+";";
 	}
 }

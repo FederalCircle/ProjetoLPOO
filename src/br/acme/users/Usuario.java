@@ -88,7 +88,7 @@ public abstract class Usuario implements Serializable {
 			if(j==3||j==7||j==11) j++;
 			num[i]=Character.getNumericValue(cpf.charAt(j));
 		}
-		for(int i=1 ; i<10;i++){
+		for(int i=1 ; i<=10;i++){
 			if(num[0]!=num[i]) verif++;
 		}
 		if(verif==0)return false;

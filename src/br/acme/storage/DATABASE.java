@@ -56,16 +56,16 @@ public class DATABASE {
 	}
 	
 	public static RepositorioSolicitante lerBaseSolicitante(int id){
-		return (RepositorioSolicitante) lerDados("RepositorioSolicitante -"+id);
+		return (RepositorioSolicitante) lerDados("RepositorioSolicitante-"+id);
 	}
 	public static RepositorioMotorista lerBaseMotorista(int id){
-		return (RepositorioMotorista) lerDados("RepositorioSolicitante -"+id);
+		return (RepositorioMotorista) lerDados("RepositorioMotorista-"+id);
 	}
 	public static RepositorioViagem lerBaseViagem(int id){
-		return (RepositorioViagem) lerDados("RepositorioSolicitante -"+id);
+		return (RepositorioViagem) lerDados("RepositorioViagem-"+id);
 	}
 	public static Gerente lerBaseGerente(int id){
-		return (Gerente) lerDados("RepositorioSolicitante -"+id);
+		return (Gerente) lerDados("Gerente-"+id);
 	}
 	
 }
