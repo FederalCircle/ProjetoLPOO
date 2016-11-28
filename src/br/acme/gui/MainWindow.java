@@ -28,8 +28,8 @@ public class MainWindow extends Application {
 		Label hMsg = new Label("HEADER");
 		Label bMsg = new Label("BODY");
 		Label fMsg = new Label("FOOTER");
-		//Image imagemLogo;
-		ImageView logo = new ImageView(new Image("file:/resources/img/logoFX.jpeg"));
+		Image imagemLogo = new Image(getClass().getResource("resources/img/logoFX.jpg").toString());
+		ImageView logo = new ImageView(imagemLogo);
 		
 		// Hierarchy
 		header.getChildren().addAll(logo, hMsg);
@@ -48,6 +48,7 @@ public class MainWindow extends Application {
 		
 		Scene mainScene = new Scene(mainBox, 800, 600);
 		String css = this.getClass().getResource("resources/mainStyle.css").toExternalForm();
+		mainStage.setResizable(false);
 		mainScene.getStylesheets().add(css);
 		mainStage.setTitle("MainWindow");
 		mainStage.setScene(mainScene);

@@ -1,3 +1,6 @@
+#wrap-all{
+	-fx-fill-width:true;
+}
 #header{
 	-fx-background-color: red;
 	-fx-padding:10px;
