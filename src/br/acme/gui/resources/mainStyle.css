@@ -1,0 +1,15 @@
+#header{
+	-fx-background-color: red;
+	-fx-padding:10px;
+}
+#body{
+	-fx-background-color: green;
+	-fx-padding:10px;
+}
+#footer{
+	-fx-background-color: blue;
+	-fx-padding:10px;
+}
+.container{
+	
+}

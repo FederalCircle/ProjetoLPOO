@@ -1,10 +1,12 @@
 package br.acme.gui;
 
-import com.sun.javafx.scene.layout.region.Margins;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ImageInput;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -15,22 +17,40 @@ public class MainWindow extends Application {
 	}
 	
 	public void start(Stage mainStage) throws Exception {
-		VBox mainBox = new VBox();
-		VBox header = new VBox();
-		VBox body = new VBox();
-		VBox footer = new VBox();
 		
+		// Layout containers
+		VBox mainBox = new VBox();
+			HBox header = new HBox();
+			HBox body = new HBox();
+			HBox footer = new HBox();
+		
+		// Elements
 		Label hMsg = new Label("HEADER");
 		Label bMsg = new Label("BODY");
 		Label fMsg = new Label("FOOTER");
+		//Image imagemLogo;
+		ImageView logo = new ImageView(new Image("file:/resources/img/logoFX.jpeg"));
 		
-		header.getChildren().add(hMsg);
+		// Hierarchy
+		header.getChildren().addAll(logo, hMsg);
 		body.getChildren().add(bMsg);
 		footer.getChildren().add(fMsg);
 		mainBox.getChildren().addAll(header, body, footer);
 		
+		// CSS
+		mainBox.setId("wrap-all");
+		header.setId("header");
+		body.setId("body");
+		footer.setId("footer");
+		header.getStyleClass().add("contaier");
+		body.getStyleClass().add("container");
+		footer.getStyleClass().add("container");
+		
+		Scene mainScene = new Scene(mainBox, 800, 600);
+		String css = this.getClass().getResource("resources/mainStyle.css").toExternalForm();
+		mainScene.getStylesheets().add(css);
 		mainStage.setTitle("MainWindow");
-		mainStage.setScene(new Scene(mainBox, 500, 500));
+		mainStage.setScene(mainScene);
 		mainStage.show();
 	}
 }
