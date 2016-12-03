@@ -1,14 +1,14 @@
 package br.acme.gui;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.effect.ImageInput;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
 public class MainWindow extends Application {
 
@@ -16,42 +16,53 @@ public class MainWindow extends Application {
 		launch(args);
 	}
 	
-	public void start(Stage mainStage) throws Exception {
+	public void start(Stage window){
+		BorderPane root = new BorderPane();
+			VBox loginBox = new VBox(20);
+				Label mainTitle = new Label("Projeto LPOO");
+				Label subTitle = new Label("Login");
+				//Label userLabel = new Label("Usuário");
+				//Label passLabel = new Label("Senha");
+				TextField userInput = new TextField();
+				TextField passInput = new TextField();
+				HBox btnBox = new HBox(10);
+					Button loginButton = new Button("Login");
+					Button signUpButton = new Button("Sign Up");
 		
-		// Layout containers
-		VBox mainBox = new VBox();
-			HBox header = new HBox();
-			HBox body = new HBox();
-			HBox footer = new HBox();
+		/////////////// Layout Config ///////////////
+		root.setCenter(loginBox);
+		root.requestFocus();
+		BorderPane.setMargin(loginBox, new Insets(-50, 10, 10, 10));// Centralize
+			loginBox.getChildren().addAll(mainTitle, subTitle,userInput, passInput, btnBox);
+			loginBox.setAlignment(Pos.CENTER);
+			loginBox.setMaxWidth(300);
+				mainTitle.getStyleClass().addAll("lb-large", "bold");
+				userInput.setPromptText("Email");
+				userInput.setFocusTraversable(false);// Mantém desselecionado
+				passInput.setPromptText("Senha");
+				passInput.setFocusTraversable(false);
+				btnBox.getChildren().addAll(loginButton, signUpButton);
+				btnBox.setAlignment(Pos.CENTER);
+					loginButton.setOnAction(new EventHandler<ActionEvent>(){
+						public void handle(ActionEvent event) {
+							
+						}
+					});
+					signUpButton.setOnAction(new EventHandler<ActionEvent>(){
+						public void handle(ActionEvent event) {
+							
+						}
+					});
 		
-		// Elements
-		Label hMsg = new Label("HEADER");
-		Label bMsg = new Label("BODY");
-		Label fMsg = new Label("FOOTER");
-		Image imagemLogo = new Image(getClass().getResource("resources/img/logoFX.jpg").toString());
-		ImageView logo = new ImageView(imagemLogo);
-		
-		// Hierarchy
-		header.getChildren().addAll(logo, hMsg);
-		body.getChildren().add(bMsg);
-		footer.getChildren().add(fMsg);
-		mainBox.getChildren().addAll(header, body, footer);
-		
-		// CSS
-		mainBox.setId("wrap-all");
-		header.setId("header");
-		body.setId("body");
-		footer.setId("footer");
-		header.getStyleClass().add("contaier");
-		body.getStyleClass().add("container");
-		footer.getStyleClass().add("container");
-		
-		Scene mainScene = new Scene(mainBox, 800, 600);
+		/////////////// Scene Config ///////////////
+		Scene loginScene = new Scene(root, 800, 500);
 		String css = this.getClass().getResource("resources/mainStyle.css").toExternalForm();
-		mainStage.setResizable(false);
-		mainScene.getStylesheets().add(css);
-		mainStage.setTitle("MainWindow");
-		mainStage.setScene(mainScene);
-		mainStage.show();
+		loginScene.getStylesheets().add(css);
+		
+		/////////////// Stage Config ///////////////
+		window.setResizable(false);
+		window.setTitle("Projeto LPOO");
+		window.setScene(loginScene);
+		window.show();
 	}
 }
