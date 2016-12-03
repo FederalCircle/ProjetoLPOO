@@ -1,6 +1,6 @@
 package br.acme.tests;
 
-import br.acme.storage.RepositorioMotorista;
+import br.acme.storage.*;
 import br.acme.users.Motorista;
 
 public class TesteRepositorioMotorista {
@@ -13,7 +13,7 @@ public class TesteRepositorioMotorista {
 			Motorista motMaria = new Motorista( "450.047.226-68", "Maria", "maria123", "maria@motor.com", "Feminino", true);
 			
 			// Criando o repositório ----------------------------------------------------------------------------------------------------
-			RepositorioMotorista repositorio = new RepositorioMotorista();
+			IRepositorio<Motorista> repositorio = new RepositorioMotorista();
 			
 			// Adicionando os Motoristas ao repositorio ----------------------------------------------------------------------------------------------------
 			try{
@@ -26,7 +26,7 @@ public class TesteRepositorioMotorista {
 			}
 			
 			System.out.println("ID\t\tNome\t\tEmail");
-			for(Motorista user: repositorio.getListaMotorista()){
+			for(Motorista user: repositorio.getLista()){
 				if(user==null)break;
 				System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 			}
@@ -40,7 +40,7 @@ public class TesteRepositorioMotorista {
 				System.out.println(e.getMessage());
 			}
 			System.out.println("ID\t\tNome\t\tEmail");
-			for(Motorista user: repositorio.getListaMotorista()){
+			for(Motorista user: repositorio.getLista()){
 				if(user==null)break;
 				System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 			}
@@ -54,7 +54,7 @@ public class TesteRepositorioMotorista {
 				System.out.println(e.getMessage());
 			}
 			System.out.println("ID\t\tNome\t\tEmail");
-			for(Motorista user: repositorio.getListaMotorista()){
+			for(Motorista user: repositorio.getLista()){
 				if(user==null)break;
 				System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 			}

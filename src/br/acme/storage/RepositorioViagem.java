@@ -1,10 +1,10 @@
 package br.acme.storage;
 import java.io.*;
+import br.acme.location.*;
+import br.acme.users.Usuario;
+import br.acme.exception.RepositorioException;
 
-import br.acme.location.Viagem;
-import br.acme.exception.*;
-
-public class RepositorioViagem implements IRepositorioViagem,Serializable{
+public class RepositorioViagem implements IRepositorio,Serializable {
 	/**
 	 * 
 	 */
@@ -18,23 +18,26 @@ public class RepositorioViagem implements IRepositorioViagem,Serializable{
 		idIncrement++;
 		this.setId(idIncrement);
 	}
+	
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
-	public Viagem[] getListaViagem() {
+	public Viagem[] getLista() {
 		return listaViagem;
 	}
 
-	public void setListaViagem(Viagem[] listaViagem) {
-		this.listaViagem = listaViagem;
+	public void setLista(Object[] listaViagem) {
+		this.listaViagem = (Viagem[]) listaViagem;
 	}
 	
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void adicionar(Viagem novoViagem)throws RepositorioException{
+	public void adicionar(Object novoViagem) throws RepositorioException{
 		/* 
 		 * Para cada elemento não nulo do Array:
 		 * 	 > Compara o ID do atual com o ID do novo:
@@ -45,13 +48,13 @@ public class RepositorioViagem implements IRepositorioViagem,Serializable{
 		int i=0;// Índice do elemento no Array
 		for(Viagem elemento: listaViagem){
 			if(elemento!=null){
-				if(elemento.getId()==novoViagem.getId())
-					throw new RepositorioException("JA há uma viagem com essa ID");
+				if(elemento.getId()==((Viagem)novoViagem).getId())
+					throw new RepositorioException("Ja existe um objeto com essa ID");
 				else
 					i++;
 			}
 			else{
-				listaViagem[i]=novoViagem;
+				listaViagem[i]=(Viagem)novoViagem;
 				break;
 			}
 		}
@@ -67,8 +70,8 @@ public class RepositorioViagem implements IRepositorioViagem,Serializable{
 		 */
 		boolean removido = false; // Varia de acordo com o sucesso do método
 		int i=0;
-		if(listaViagem[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
 		for(Viagem elemento: listaViagem){
+			if(listaViagem[0]==null)throw new RepositorioException("O repositório está vazio.");
 			if(elemento==null)break;
 			if(elemento.getId() == id){
 				elemento=null;
@@ -84,24 +87,42 @@ public class RepositorioViagem implements IRepositorioViagem,Serializable{
 			System.out.println("Viagem removido com sucesso.");
 		}
 		else
-			throw new RepositorioException("A viagem nao foi encontrada");
-	}
-
-	public Viagem buscar(long id)throws RepositorioException{
-		if(listaViagem[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
-		for(Viagem viagem : listaViagem){
-			if(viagem==null)break;
-			if(viagem.getId() == id){
-				return viagem;
-			}
-		}
-		throw new RepositorioException("A viagem nao foi emcontrada");
+			throw new RepositorioException("Viagem não encontrado.");
 	}
 	
-	public Viagem[] buscarTodos()throws RepositorioException{
-		if(listaViagem[0]==null){
-			throw new RepositorioException("o Repositorio esta Vazio");
+	public void alterar(long id, Object novoViagem) throws RepositorioException{
+		boolean alterado = false; // Varia de acordo com o sucesso do método
+		int i=0;
+		if(listaViagem[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
+		for(Viagem elemento: listaViagem){
+			if(elemento==null)break;
+			if(elemento.getId() == id){
+				listaViagem[i]=(Viagem)novoViagem;
+				alterado=true;
+			}
+			i++;
 		}
-		return this.getListaViagem();
+		if(alterado)
+			System.out.println("Viagem alterado com sucesso.");
+		else
+			throw new RepositorioException("Viagem não encontrada.");
+	}
+	
+	public Viagem buscar(long id) throws RepositorioException{
+		if(listaViagem[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
+		for(Viagem Viagem : listaViagem){
+			if(Viagem==null)break;
+			if(Viagem.getId() == id){
+				return Viagem;
+			}
+		}
+		throw new RepositorioException("Viagem não encontrado.");
+	}
+	
+	public Viagem[] buscarTodos() throws RepositorioException{
+		if(listaViagem[0]==null){
+			throw new RepositorioException("Repositorio vazio");
+		}
+		return this.getLista();
 	}
 }

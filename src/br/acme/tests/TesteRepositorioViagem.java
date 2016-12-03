@@ -2,7 +2,7 @@ package br.acme.tests;
 
 import java.util.Date;
 
-import br.acme.storage.RepositorioViagem;
+import br.acme.storage.*;
 import br.acme.users.Motorista;
 import br.acme.users.Solicitante;
 import br.acme.location.Lugar;
@@ -35,7 +35,7 @@ public class TesteRepositorioViagem {
 		Viagem  travel3 = new Viagem( solAndre, motMaria, inicio, fim, 60, "Cheque");
 		
 		// Criando o repositório ----------------------------------------------------------------------------------------------------
-		RepositorioViagem repositorio = new RepositorioViagem();
+		IRepositorio<Viagem> repositorio = new RepositorioViagem();
 		
 		// Adicionando os Viagems ao repositorio ----------------------------------------------------------------------------------------------------
 		repositorio.adicionar(travel1);
@@ -43,7 +43,7 @@ public class TesteRepositorioViagem {
 		repositorio.adicionar(travel3);
 		
 		System.out.println("ID\t\tOrigem\t\tDestino");
-		for(Viagem travel: repositorio.getListaViagem()){
+		for(Viagem travel: repositorio.getLista()){
 			if(travel==null)break;
 			System.out.println("#"+travel.getId()+"\t\t"+travel.getOrigem().getEndereco()+"\t\t"+travel.getDestino().getEndereco());
 		}
@@ -54,7 +54,7 @@ public class TesteRepositorioViagem {
 		repositorio.remover(5); // Viagem não existe
 		
 		System.out.println("ID\t\tOrigem\t\tDestino");
-		for(Viagem travel: repositorio.getListaViagem()){
+		for(Viagem travel: repositorio.getLista()){
 			if(travel==null)break;
 			System.out.println("#"+travel.getId()+"\t\t"+travel.getOrigem().getEndereco()+"\t\t"+travel.getDestino().getEndereco());
 		}

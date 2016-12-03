@@ -12,7 +12,7 @@ public class TesteCaronas {
 		Date dataNascimento = new Date();// necessário para Solicitante
 		try{
 			// Criando o repositório de solicitantes
-			IRepositorioSolicitante repSolicitante = new RepositorioSolicitante();
+			IRepositorio<Solicitante> repSolicitante = new RepositorioSolicitante();
 			
 			// Criando o gerente 
 			Gerente gerente = new Gerente("084.557.751-49","gerente","gerente123","gerente@gerente.com","Masculino");
@@ -45,27 +45,27 @@ public class TesteCaronas {
 			solAndre.solicitarCarona(gerente.getRepMotor(), inicio, fim, "Cheque");
 			
 			//Listando todas as viagens feitas
-			for(Motorista motor: gerente.getRepMotor().getListaMotorista()){
+			for(Object motor: gerente.getRepMotor().getLista()){
 				if(motor==null) break;
-				motor.historico();
+				((Motorista) motor).historico();
 			}
 			
 			// Cancelando carona
 			solPedro.cancelarCarona();
 			
 			//Listando todas as viagens feitas
-			for(Motorista motor: gerente.getRepMotor().getListaMotorista()){
+			for(Object motor: gerente.getRepMotor().getLista()){
 				if(motor==null) break;
-				motor.historico();
+				((Motorista)motor).historico();
 			 }
 			System.out.println();
 			DATABASE.salvarEstado(gerente.getRepMotor());
 			DATABASE.salvarEstado(repSolicitante);
-			IRepositorioMotorista b = DATABASE.lerBaseMotorista(1);
-			for(Motorista motor: b.getListaMotorista()){
+			IRepositorio b = DATABASE.lerBaseMotorista(1);
+			for(Object motor: b.getLista()){
 				try{
 				if(motor==null) break;
-				motor.historico();
+				((Motorista)motor).historico();
 			 }catch(Exception e){
 				 System.out.println(e.getMessage());
 			 }

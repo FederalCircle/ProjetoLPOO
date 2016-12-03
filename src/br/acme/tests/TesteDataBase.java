@@ -12,7 +12,7 @@ public class TesteDataBase {
 		Date dataNascimento = new Date();// necessário para Solicitante
 		try{
 			// Criando o repositório de solicitantes
-			IRepositorioSolicitante repSolicitante = new RepositorioSolicitante();
+			IRepositorio<Solicitante> repSolicitante = new RepositorioSolicitante();
 			
 			// Criando o gerente 
 			Gerente gerente = new Gerente("084.557.751-49","gerente","gerente123","gerente@gerente.com","Masculino");
@@ -51,9 +51,9 @@ public class TesteDataBase {
 			DATABASE.salvarEstado(solPaula.getViagens());
 			
 			// Lendo da Database
-			IRepositorioMotorista salvoRepMotor = DATABASE.lerBaseMotorista(1);
-			IRepositorioSolicitante salvoRepSoli = DATABASE.lerBaseSolicitante(1);
-			IRepositorioViagem salvoRepViagem = DATABASE.lerBaseViagem(1);
+			IRepositorio<Motorista> salvoRepMotor = DATABASE.lerBaseMotorista(1);
+			IRepositorio<Solicitante> salvoRepSoli = DATABASE.lerBaseSolicitante(1);
+			IRepositorio<Viagem> salvoRepViagem = DATABASE.lerBaseViagem(1);
 			Gerente salvoGerente = DATABASE.lerBaseGerente(1);
 			
 			// Imprimindo o que foi lido

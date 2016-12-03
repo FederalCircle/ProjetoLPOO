@@ -2,8 +2,9 @@ package br.acme.tests;
 
 import java.util.Date;
 
+
 import br.acme.users.Solicitante;
-import br.acme.storage.RepositorioSolicitante;
+import br.acme.storage.*;
 
 public class TesteRepositorioSolicitante {
 
@@ -16,7 +17,7 @@ public class TesteRepositorioSolicitante {
 			Solicitante userAndre = new Solicitante("553.754.276-56", "andre@user.com", "321", "André", "Masculino", dataNascimento, 99332211);
 			
 			// Criando o repositório ----------------------------------------------------------------------------------------------------
-			RepositorioSolicitante repositorio = new RepositorioSolicitante();
+			IRepositorio<Solicitante> repositorio = new RepositorioSolicitante();
 			
 			// Adicionando os solicitantes ao repositorio ----------------------------------------------------------------------------------------------------
 			try{
@@ -27,7 +28,7 @@ public class TesteRepositorioSolicitante {
 				System.out.println(e.getMessage());
 			}
 			System.out.println("ID\t\tNome\t\tEmail");
-			for(Solicitante user: repositorio.getListaSolicitante()){
+			for(Solicitante user: repositorio.getLista()){
 				if(user==null)break;
 				System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 			}
@@ -40,7 +41,7 @@ public class TesteRepositorioSolicitante {
 				System.out.println(e.getMessage());
 			}
 			System.out.println("ID\t\tNome\t\tEmail");
-			for(Solicitante user: repositorio.getListaSolicitante()){
+			for(Solicitante user: repositorio.getLista()){
 				if(user==null)break;
 				System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 			}
@@ -53,7 +54,7 @@ public class TesteRepositorioSolicitante {
 				System.out.println(e.getMessage());
 			}
 			System.out.println("ID\t\tNome\t\tEmail");
-			for(Solicitante user: repositorio.getListaSolicitante()){
+			for(Solicitante user: repositorio.getLista()){
 				if(user==null)break;
 				System.out.println("#"+user.getId()+"\t\t"+user.getNome()+"\t\t"+user.getEmail());
 			}

@@ -6,7 +6,7 @@ import br.acme.exception.*;
 @SuppressWarnings("serial")
 public class Gerente extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
-		private IRepositorioMotorista repMotor = new RepositorioMotorista();
+		private IRepositorio<Motorista> repMotor = new RepositorioMotorista();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Gerente(String cpf, String nome, String senha, String email, String sexo) throws UsersExceptions{
@@ -15,7 +15,7 @@ public class Gerente extends Usuario {
 	}
 
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
-	public IRepositorioMotorista getRepMotor(){
+	public IRepositorio getRepMotor(){
 		return repMotor;
 	}
 
@@ -34,14 +34,14 @@ public class Gerente extends Usuario {
 	
 	public void listarMotoristas() throws RepositorioException{
 		System.out.println("Nome\tEmail");
-		for(Motorista motor : repMotor.buscarTodos()){
+		for(Object motor : repMotor.buscarTodos()){
 			if(motor==null) break;
-			System.out.println(motor.getNome()+"\t"+motor.getEmail());
+			System.out.println(((Motorista) motor).getNome()+"\t"+((Motorista) motor).getEmail());
 		}
 		System.out.println();
 	}
 	
-	public void listarClientes(IRepositorioSolicitante lista )throws RepositorioException{
+	public void listarClientes(IRepositorio<Solicitante> lista )throws RepositorioException{
 		System.out.println("Nome\tEmail");
 		for(Solicitante solicitante : lista.buscarTodos()){
 			if(solicitante==null) break;

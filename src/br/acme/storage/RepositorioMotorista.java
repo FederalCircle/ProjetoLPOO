@@ -1,9 +1,10 @@
 package br.acme.storage;
 import java.io.*;
 import br.acme.users.Motorista;
+import br.acme.users.Usuario;
 import br.acme.exception.RepositorioException;
 
-public class RepositorioMotorista implements IRepositorioMotorista,Serializable {
+public class RepositorioMotorista implements IRepositorio,Serializable {
 	/**
 	 * 
 	 */
@@ -19,12 +20,12 @@ public class RepositorioMotorista implements IRepositorioMotorista,Serializable 
 	}
 	
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
-	public Motorista[] getListaMotorista() {
+	public Motorista[] getLista() {
 		return listaMotorista;
 	}
 
-	public void setListaMotorista(Motorista[] listaMotorista) {
-		this.listaMotorista = listaMotorista;
+	public void setLista(Object[] listaMotorista) {
+		this.listaMotorista = (Motorista[]) listaMotorista;
 	}
 	
 	public int getId() {
@@ -36,7 +37,7 @@ public class RepositorioMotorista implements IRepositorioMotorista,Serializable 
 	}
 
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void adicionar(Motorista novoMotorista) throws RepositorioException{
+	public void adicionar(Object novoMotorista) throws RepositorioException{
 		/* 
 		 * Para cada elemento não nulo do Array:
 		 * 	 > Compara o ID do atual com o ID do novo:
@@ -47,13 +48,13 @@ public class RepositorioMotorista implements IRepositorioMotorista,Serializable 
 		int i=0;// Índice do elemento no Array
 		for(Motorista elemento: listaMotorista){
 			if(elemento!=null){
-				if(elemento.getId()==novoMotorista.getId())
+				if(elemento.getId()==((Motorista)novoMotorista).getId())
 					throw new RepositorioException("Ja existe um objeto com essa ID");
 				else
 					i++;
 			}
 			else{
-				listaMotorista[i]=novoMotorista;
+				listaMotorista[i]=(Motorista)novoMotorista;
 				break;
 			}
 		}
@@ -89,14 +90,14 @@ public class RepositorioMotorista implements IRepositorioMotorista,Serializable 
 			throw new RepositorioException("Motorista não encontrado.");
 	}
 	
-	public void alterar(long id, Motorista novoMotorista) throws RepositorioException{
+	public void alterar(long id, Object novoMotorista) throws RepositorioException{
 		boolean alterado = false; // Varia de acordo com o sucesso do método
 		int i=0;
 		if(listaMotorista[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
 		for(Motorista elemento: listaMotorista){
 			if(elemento==null)break;
 			if(elemento.getId() == id){
-				listaMotorista[i]=novoMotorista;
+				listaMotorista[i]=(Motorista)novoMotorista;
 				alterado=true;
 			}
 			i++;
@@ -122,6 +123,6 @@ public class RepositorioMotorista implements IRepositorioMotorista,Serializable 
 		if(listaMotorista[0]==null){
 			throw new RepositorioException("Repositorio vazio");
 		}
-		return this.getListaMotorista();
+		return this.getLista();
 	}
 }

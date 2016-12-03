@@ -11,7 +11,7 @@ public class Solicitante extends Usuario {
 	private int numeroCelular;
 	private double saldo;
 	private Lugar[] lugares = new Lugar[10];
-	private IRepositorioViagem viagens = new RepositorioViagem();
+	private IRepositorio<Viagem> viagens = new RepositorioViagem();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Solicitante(String cpf, String email, String senha, String nome, String sexo, Date dataNascimento, int numeroCelular) throws UsersExceptions{
@@ -48,11 +48,11 @@ public class Solicitante extends Usuario {
 		if(getSenha().equals(senha)) this.lugares = lugares;
 	}
 
-	public IRepositorioViagem getViagens() {
+	public IRepositorio getViagens() {
 		return viagens;
 	}
 
-	public void setViagens(IRepositorioViagem viagens, String senha) {
+	public void setViagens(IRepositorio<Viagem> viagens, String senha) {
 		if(getSenha().equals(senha)) this.viagens = viagens;
 	}
 	
@@ -85,10 +85,10 @@ public class Solicitante extends Usuario {
 	}
 
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void solicitarCarona(IRepositorioMotorista repositorio, Lugar inicio, Lugar fim, String formaPagamento) throws RepositorioException{
-		for(Motorista motor : repositorio.buscarTodos()){
-			if(motor.isDisponivel()== true){ 
-				Viagem nova = motor.responderPedido(this, inicio, fim, formaPagamento);
+	public void solicitarCarona(IRepositorio<Motorista> iRepositorio, Lugar inicio, Lugar fim, String formaPagamento) throws RepositorioException{
+		for(Motorista motor : iRepositorio.buscarTodos()){
+			if( motor.isDisponivel()== true){ 
+				Viagem nova =  motor.responderPedido(this, inicio, fim, formaPagamento);
 				viagens.adicionar(nova);
 				this.saldo-=nova.getValorViagem();
 				break;		

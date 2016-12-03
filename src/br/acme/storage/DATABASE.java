@@ -1,6 +1,7 @@
 package br.acme.storage;
 import br.acme.users.*;
 import java.io.*;
+import br.acme.location.*;
 
 public class DATABASE {
 	static String nomeIRepMotor= "repMotor";
@@ -29,15 +30,15 @@ public class DATABASE {
 		}
 	}
 	
-	public static void salvarEstado(IRepositorioMotorista repMotor){
-    	DATABASE.gravarDados(repMotor, repMotor.getId());
+	public static void salvarEstado(IRepositorio rep){
+    	DATABASE.gravarDados(rep, rep.getId());
 	}
-	public static void salvarEstado(IRepositorioSolicitante repSolic){
+	/*public static void salvarEstado(IRepositorio<Solicitante> repSolic){
 		DATABASE.gravarDados(repSolic, repSolic.getId());
 	}
-	public static void salvarEstado(IRepositorioViagem repViagem){
+	public static void salvarEstado(IRepositorio<Viagem> repViagem){
 		DATABASE.gravarDados(repViagem, repViagem.getId());
-	}
+	}*/
 	public static void salvarEstado(Gerente gerente){
 		DATABASE.gravarDados(gerente, (int)gerente.getId());
 	}

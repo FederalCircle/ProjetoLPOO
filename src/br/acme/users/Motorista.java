@@ -11,7 +11,7 @@ import java.util.Random;
 public class Motorista extends Usuario implements Serializable {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private boolean disponivel;
-	private IRepositorioViagem viagens = new RepositorioViagem();
+	private IRepositorio<Viagem> viagens = new RepositorioViagem();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
 	public Motorista(String cpf, String nome, String senha, String email, String sexo, boolean disponivel) throws UsersExceptions {
@@ -28,7 +28,7 @@ public class Motorista extends Usuario implements Serializable {
 		this.disponivel = disponivel;
 	}
 
-	public IRepositorioViagem getViagens() {
+	public IRepositorio<Viagem> getViagens() {
 		return viagens;
 	}
 

@@ -1,10 +1,10 @@
 package br.acme.storage;
 import java.io.*;
-
-import br.acme.exception.RepositorioException;
 import br.acme.users.Solicitante;
+import br.acme.users.Usuario;
+import br.acme.exception.RepositorioException;
 
-public class RepositorioSolicitante implements IRepositorioSolicitante,Serializable {
+public class RepositorioSolicitante implements IRepositorio,Serializable {
 	/**
 	 * 
 	 */
@@ -18,23 +18,26 @@ public class RepositorioSolicitante implements IRepositorioSolicitante,Serializa
 		idIncrement++;
 		this.setId(idIncrement);
 	}
+	
 	// Getters and Setters ----------------------------------------------------------------------------------------------------
-	public Solicitante[] getListaSolicitante() {
+	public Solicitante[] getLista() {
 		return listaSolicitante;
 	}
 
-	public void setListaSolicitante(Solicitante[] listaSolicitante) {
-		this.listaSolicitante = listaSolicitante;
+	public void setLista(Object[] listaSolicitante) {
+		this.listaSolicitante = (Solicitante[]) listaSolicitante;
 	}
 	
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void adicionar(Solicitante novoSolicitante)throws RepositorioException{
+	public void adicionar(Object novoSolicitante) throws RepositorioException{
 		/* 
 		 * Para cada elemento não nulo do Array:
 		 * 	 > Compara o ID do atual com o ID do novo:
@@ -45,18 +48,19 @@ public class RepositorioSolicitante implements IRepositorioSolicitante,Serializa
 		int i=0;// Índice do elemento no Array
 		for(Solicitante elemento: listaSolicitante){
 			if(elemento!=null){
-				if(elemento.getId()==novoSolicitante.getId())
-					throw new RepositorioException("o ID ja esta em uso");				else
+				if(elemento.getId()==((Solicitante)novoSolicitante).getId())
+					throw new RepositorioException("Ja existe um objeto com essa ID");
+				else
 					i++;
 			}
 			else{
-				listaSolicitante[i]=novoSolicitante;
+				listaSolicitante[i]=(Solicitante)novoSolicitante;
 				break;
 			}
 		}
 	}
 	
-	public void remover(long id)throws RepositorioException{
+	public void remover(long id) throws RepositorioException{
 		/*
 		 * Caso qualquer elemento nulo seja encontrado, o laço é encerrado;
 		 * Se o elemento com o ID especificado seja encontrado a posição dele é igualada à null;
@@ -66,8 +70,8 @@ public class RepositorioSolicitante implements IRepositorioSolicitante,Serializa
 		 */
 		boolean removido = false; // Varia de acordo com o sucesso do método
 		int i=0;
-		if(listaSolicitante[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
 		for(Solicitante elemento: listaSolicitante){
+			if(listaSolicitante[0]==null)throw new RepositorioException("O repositório está vazio.");
 			if(elemento==null)break;
 			if(elemento.getId() == id){
 				elemento=null;
@@ -83,17 +87,17 @@ public class RepositorioSolicitante implements IRepositorioSolicitante,Serializa
 			System.out.println("Solicitante removido com sucesso.");
 		}
 		else
-			throw new RepositorioException("o Solicitante nao encontrado");
+			throw new RepositorioException("Solicitante não encontrado.");
 	}
 	
-	public void alterar(long id, Solicitante novoSolicitante)throws RepositorioException{
+	public void alterar(long id, Object novoSolicitante) throws RepositorioException{
 		boolean alterado = false; // Varia de acordo com o sucesso do método
 		int i=0;
 		if(listaSolicitante[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
 		for(Solicitante elemento: listaSolicitante){
 			if(elemento==null)break;
 			if(elemento.getId() == id){
-				listaSolicitante[i]=novoSolicitante;
+				listaSolicitante[i]=(Solicitante)novoSolicitante;
 				alterado=true;
 			}
 			i++;
@@ -104,21 +108,21 @@ public class RepositorioSolicitante implements IRepositorioSolicitante,Serializa
 			throw new RepositorioException("Solicitante não encontrado.");
 	}
 	
-	public Solicitante buscar(long id)throws RepositorioException{
+	public Solicitante buscar(long id) throws RepositorioException{
 		if(listaSolicitante[0]==null)throw new RepositorioException("o Repositorio esta Vazio");
-		for(Solicitante solicitante : listaSolicitante){
-			if(solicitante==null)break;
-			if(solicitante.getId() == id){
-				return solicitante;
+		for(Solicitante Solicitante : listaSolicitante){
+			if(Solicitante==null)break;
+			if(Solicitante.getId() == id){
+				return Solicitante;
 			}
 		}
-		throw new RepositorioException("o Solicitante nao foi encontrado");
+		throw new RepositorioException("Solicitante não encontrado.");
 	}
 	
-	public Solicitante[] buscarTodos()throws RepositorioException{
+	public Solicitante[] buscarTodos() throws RepositorioException{
 		if(listaSolicitante[0]==null){
-			throw new RepositorioException("o Repositorio esta Vazio");
+			throw new RepositorioException("Repositorio vazio");
 		}
-		return this.getListaSolicitante();
+		return this.getLista();
 	}
 }
