@@ -15,9 +15,9 @@ public class TesteRepositorioViagem {
 		try{
 /*Solicitantes, Motoristas e Viagens são necessários para Viagem*/
 		// Criando os solicitantes
-		Solicitante solPaula = new Solicitante("450.047.226-68", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, 99112233);
-		Solicitante solPedro = new Solicitante("378.840.363-20", "pedro@travel.com", "pedro123", "Pedro", "Masculino", dataNascimento, 99887755);
-		Solicitante solAndre = new Solicitante("575.580.722-12", "andre@travel.com", "andre123", "André", "Masculino", dataNascimento, 99332211);
+		Solicitante solPaula = new Solicitante("450.047.226-68", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, "99112233");
+		Solicitante solPedro = new Solicitante("378.840.363-20", "pedro@travel.com", "pedro123", "Pedro", "Masculino", dataNascimento, "99887755");
+		Solicitante solAndre = new Solicitante("575.580.722-12", "andre@travel.com", "andre123", "André", "Masculino", dataNascimento, "99332211");
 		
 		// Criando os motoristas
 		Motorista motJose = new Motorista("013.288.455-08", "Jose", "jose123", "jose@motor.com", "Masculino", true);

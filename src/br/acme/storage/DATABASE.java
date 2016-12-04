@@ -19,7 +19,7 @@ public class DATABASE {
 	
 	private static void gravarDados(Object obj , int id){
 		try{
-			arqGrv = new FileOutputStream(geraNome(obj, id));
+			arqGrv = new FileOutputStream("db/"+geraNome(obj, id));
 	    	objGrv = new ObjectOutputStream(arqGrv);
 	        objGrv.writeObject(obj);	         
 	        objGrv.flush(); objGrv.close();	        
@@ -57,16 +57,16 @@ public class DATABASE {
 	}
 	
 	public static RepositorioSolicitante lerBaseSolicitante(int id){
-		return (RepositorioSolicitante) lerDados("RepositorioSolicitante-"+id);
+		return (RepositorioSolicitante) lerDados("db/RepositorioSolicitante-"+id);
 	}
 	public static RepositorioMotorista lerBaseMotorista(int id){
-		return (RepositorioMotorista) lerDados("RepositorioMotorista-"+id);
+		return (RepositorioMotorista) lerDados("db/RepositorioMotorista-"+id);
 	}
 	public static RepositorioViagem lerBaseViagem(int id){
-		return (RepositorioViagem) lerDados("RepositorioViagem-"+id);
+		return (RepositorioViagem) lerDados("db/RepositorioViagem-"+id);
 	}
 	public static Gerente lerBaseGerente(int id){
-		return (Gerente) lerDados("Gerente-"+id);
+		return (Gerente) lerDados("db/Gerente-"+id);
 	}
 	
 }

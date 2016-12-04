@@ -8,13 +8,13 @@ import br.acme.exception.*;
 public class Solicitante extends Usuario {
 	// Atributos ----------------------------------------------------------------------------------------------------
 	private Date dataNascimento = new Date();
-	private int numeroCelular;
+	private String numeroCelular;
 	private double saldo;
 	private Lugar[] lugares = new Lugar[10];
 	private IRepositorio<Viagem> viagens = new RepositorioViagem();
 	
 	// Construtor ----------------------------------------------------------------------------------------------------
-	public Solicitante(String cpf, String email, String senha, String nome, String sexo, Date dataNascimento, int numeroCelular) throws UsersExceptions{
+	public Solicitante(String cpf, String email, String senha, String nome, String sexo, Date dataNascimento, String numeroCelular) throws UsersExceptions{
 		// Construtor da superClasse
 		super(cpf,nome,senha,email,sexo);
 		this.dataNascimento = dataNascimento;
@@ -32,11 +32,11 @@ public class Solicitante extends Usuario {
 		if(getSenha().equals(senha)) this.dataNascimento = dataNascimento;
 	}
 
-	public int getNumeroCelular() {
+	public String getNumeroCelular() {
 		return numeroCelular;
 	}
 
-	public void setNumeroCelular(int numeroCelular, String senha) {
+	public void setNumeroCelular(String numeroCelular, String senha) {
 		if(getSenha().equals(senha)) this.numeroCelular = numeroCelular;
 	}
 

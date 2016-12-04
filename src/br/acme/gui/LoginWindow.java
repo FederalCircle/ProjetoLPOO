@@ -11,7 +11,6 @@ import javafx.scene.layout.*;
 
 public class LoginWindow extends MainWindow {
 	
-	
 	public LoginWindow display(){
 		Stage window = new Stage();
 		Scene loginScene;

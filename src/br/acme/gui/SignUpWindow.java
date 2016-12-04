@@ -8,16 +8,21 @@ import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import br.acme.users.*;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import br.acme.exception.*;
+import br.acme.storage.*;
 
 public class SignUpWindow extends MainWindow {
 
-	public static void main(String[] args) {
-		launch(args);
-	}
-	
-	public SignUpWindow display() {
+	//public void start(Stage window){
+	public void display() {
 		Stage window = new Stage();
 		Scene signUpScene;
+
 		
 		BorderPane root = new BorderPane();
 			VBox signUpBox = new VBox(20);
@@ -55,7 +60,7 @@ public class SignUpWindow extends MainWindow {
 				nascInput.setMask("NN/NN/NNNN");
 				nascInput.setPromptText("Data de Nascimento");
 				nascInput.setDisable(true);
-				phoneInput.setMask("NN NNNNN-NNNN");
+				phoneInput.setMask("NNNNN-NNNN");
 				phoneInput.setDisable(true);
 				phoneInput.setPromptText("Número de Celular");
 			//Base inputs
@@ -93,7 +98,14 @@ public class SignUpWindow extends MainWindow {
 				btnBox.setAlignment(Pos.CENTER);
 					confirmButton.setOnAction(new EventHandler<ActionEvent>(){
 						public void handle(ActionEvent event) {
+							String submition = userType.getValue()+";"+cpfInput.getText()+";"+emailInput.getText()+";"
+									+passInput.getText()+";"+nameInput.getText()+";"+genderInput.getText();
+							if(!nascInput.isDisabled())
+								submition=submition+";"+nascInput.getText()+";"+phoneInput.getText();
 							
+							if(doSignUp(submition)){
+								window.close();
+							}
 						}
 					});
 					cancelButton.setOnAction(new EventHandler<ActionEvent>(){
@@ -113,7 +125,52 @@ public class SignUpWindow extends MainWindow {
 		window.setTitle("SignUp");
 		window.setScene(signUpScene);
 		window.showAndWait();
-		return this;
 	}
-
+	public boolean doSignUp(String submition){
+		/* infos[] ->
+		 * 0 - Tipo		| 1 - CPF
+		 * 2 - Email	| 3 - Senha
+		 * 4 - Nome		| 5 - Sexo
+		 * 6 - Nasc		| 7 - Num
+		 */
+		String[] infos = submition.split(";");
+		switch(infos[0]){
+		case "Solicitante":
+			DateFormat frmt = new SimpleDateFormat("dd/MM/yyyy");
+			try{
+				Solicitante novoSoli = new Solicitante(infos[1], infos[2], infos[3], infos[4], infos[5], frmt.parse(infos[6]), infos[7]);
+				IRepositorio<Solicitante> repSoli = DATABASE.lerBaseSolicitante(1);
+				repSoli.adicionar(novoSoli);
+				return true;
+			}catch(UsersExceptions e){
+				new AlertWindow().display(e.getMessage());
+				return false;
+			}catch(RepositorioException e){
+				new AlertWindow().display(e.getMessage());
+				return false;
+			}catch(Exception e){
+				new AlertWindow().display(e.getMessage());
+				return false;
+			}
+		case "Motorista":
+			try{
+				Motorista novoMotor = new Motorista(infos[1], infos[2], infos[3], infos[4], infos[5], true);
+				IRepositorio<Motorista> repMotor = DATABASE.lerBaseMotorista(1);
+				repMotor.adicionar(novoMotor);
+				return true;
+			}catch(UsersExceptions e){
+				new AlertWindow().display(e.getMessage());
+				return false;
+			}catch(RepositorioException e){
+				new AlertWindow().display(e.getMessage());
+				return false;
+			}catch(Exception e){
+				new AlertWindow().display(e.getMessage());
+				return false;
+			}
+		case "Gerente":
+			break;
+		}
+		return false;
+	}
 }

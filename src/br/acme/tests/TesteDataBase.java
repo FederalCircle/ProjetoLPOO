@@ -18,9 +18,9 @@ public class TesteDataBase {
 			Gerente gerente = new Gerente("084.557.751-49","gerente","gerente123","gerente@gerente.com","Masculino");
 			
 			// Criando os solicitantes
-			Solicitante solPaula = new Solicitante("407.087.551-43", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, 99112233);
-			Solicitante solPedro = new Solicitante("450.047.226-68", "pedro@travel.com", "pedro123", "Pedro", "Masculino", dataNascimento, 99887755);
-			Solicitante solAndre = new Solicitante("084.557.751-49", "andre@travel.com", "andre123", "André", "Masculino", dataNascimento, 99332211);
+			Solicitante solPaula = new Solicitante("407.087.551-43", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, "99112233");
+			Solicitante solPedro = new Solicitante("450.047.226-68", "pedro@travel.com", "pedro123", "Pedro", "Masculino", dataNascimento, "99887755");
+			Solicitante solAndre = new Solicitante("084.557.751-49", "andre@travel.com", "andre123", "André", "Masculino", dataNascimento, "99332211");
 			
 			// Criando os motoristas
 			Motorista motJose = new Motorista("450.047.226-68", "Jose", "jose123", "jose@motor.com", "Masculino", true);

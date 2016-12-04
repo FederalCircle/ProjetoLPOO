@@ -15,7 +15,7 @@ public class TesteUsersExceptions {
 		}
 		try{
 			Date dataNascimento = new Date();// Necessário para Solicitante
-			Solicitante solPaula = new Solicitante("321.654.987-10", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, 99112233);
+			Solicitante solPaula = new Solicitante("321.654.987-10", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, "99112233");
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
@@ -26,7 +26,7 @@ public class TesteUsersExceptions {
 		}
 		try{
 			Date dataNascimento = new Date();// Necessário para Solicitante
-			Solicitante solPaula = new Solicitante("382.832.212-30", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, 99112233);
+			Solicitante solPaula = new Solicitante("382.832.212-30", "paula@travel.com", "paula123", "Paula", "Feminino", dataNascimento, "99112233");
 			solPaula.setCpf("123.456.789.45", "paula123");
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -41,7 +41,7 @@ public class TesteUsersExceptions {
 		}
 		try{
 			Date dataNascimento = new Date();// necessário para Solicitante
-			Solicitante solPaula = new Solicitante("382.832.212-30", "", "paula123", "Paula", "Feminino", dataNascimento, 99112233);
+			Solicitante solPaula = new Solicitante("382.832.212-30", "", "paula123", "Paula", "Feminino", dataNascimento, "99112233");
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}

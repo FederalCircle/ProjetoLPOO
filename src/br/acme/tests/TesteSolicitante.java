@@ -8,7 +8,7 @@ public class TesteSolicitante {
 		try{
 			Date dataNascimento = new Date();
 			// Criando um solicitante ----------------------------------------------------------------------------------------------------
-			Solicitante userPaula = new Solicitante("534.616.229-15", "paula@user.com", "123", "Paula", "Feminino", dataNascimento, 912345678);
+			Solicitante userPaula = new Solicitante("534.616.229-15", "paula@user.com", "123", "Paula", "Feminino", dataNascimento, "912345678");
 			
 			// Exibindo as informações ----------------------------------------------------------------------------------------------------
 			System.out.println("Informações do usuário..."
@@ -27,7 +27,7 @@ public class TesteSolicitante {
 				userPaula.setSenha("abc", "123");
 				userPaula.setCpf("222.222.222-22", "abc");
 				userPaula.setEmail("paula_fernandes@user.com", "abc");
-				userPaula.setNumeroCelular(988776655, "abc");
+				userPaula.setNumeroCelular("988776655", "abc");
 				userPaula.setSexo("Feminino^2", "123");//Senha Errada
 			} catch(Exception e){
 				System.out.println(e.getMessage());
