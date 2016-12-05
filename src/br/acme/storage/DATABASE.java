@@ -17,9 +17,9 @@ public class DATABASE {
 		return obj.getClass().getSimpleName()+"-"+id;
 	}
 	
-	private static void gravarDados(Object obj , int id){
+	private static void gravarDados(Object obj){
 		try{
-			arqGrv = new FileOutputStream("db/"+geraNome(obj, id));
+			arqGrv = new FileOutputStream("db/db_"+obj.getClass().getSimpleName());
 	    	objGrv = new ObjectOutputStream(arqGrv);
 	        objGrv.writeObject(obj);	         
 	        objGrv.flush(); objGrv.close();	        
@@ -31,7 +31,7 @@ public class DATABASE {
 	}
 	
 	public static void salvarEstado(IRepositorio rep){
-    	DATABASE.gravarDados(rep, rep.getId());
+    	DATABASE.gravarDados(rep);
 	}
 	/*public static void salvarEstado(IRepositorio<Solicitante> repSolic){
 		DATABASE.gravarDados(repSolic, repSolic.getId());
@@ -40,7 +40,7 @@ public class DATABASE {
 		DATABASE.gravarDados(repViagem, repViagem.getId());
 	}*/
 	public static void salvarEstado(Gerente gerente){
-		DATABASE.gravarDados(gerente, (int)gerente.getId());
+		DATABASE.gravarDados(gerente);
 	}
 	
 	// -------------------------------------------------------
@@ -56,17 +56,17 @@ public class DATABASE {
         }
 	}
 	
-	public static RepositorioSolicitante lerBaseSolicitante(int id){
-		return (RepositorioSolicitante) lerDados("db/RepositorioSolicitante-"+id);
+	public static RepositorioSolicitante lerBaseSolicitante(){
+		return (RepositorioSolicitante) lerDados("db/db_RepositorioSolicitante");
 	}
-	public static RepositorioMotorista lerBaseMotorista(int id){
-		return (RepositorioMotorista) lerDados("db/RepositorioMotorista-"+id);
+	public static RepositorioMotorista lerBaseMotorista(){
+		return (RepositorioMotorista) lerDados("db/db_RepositorioMotorista");
 	}
-	public static RepositorioViagem lerBaseViagem(int id){
-		return (RepositorioViagem) lerDados("db/RepositorioViagem-"+id);
+	public static RepositorioViagem lerBaseViagem(){
+		return (RepositorioViagem) lerDados("db/db_RepositorioViagem");
 	}
-	public static Gerente lerBaseGerente(int id){
-		return (Gerente) lerDados("db/Gerente-"+id);
+	public static Gerente lerBaseGerente(){
+		return (Gerente) lerDados("db/db_Gerente");
 	}
 	
 }

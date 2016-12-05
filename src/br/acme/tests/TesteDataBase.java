@@ -51,10 +51,10 @@ public class TesteDataBase {
 			DATABASE.salvarEstado(solPaula.getViagens());
 			
 			// Lendo da Database
-			IRepositorio<Motorista> salvoRepMotor = DATABASE.lerBaseMotorista(1);
-			IRepositorio<Solicitante> salvoRepSoli = DATABASE.lerBaseSolicitante(1);
-			IRepositorio<Viagem> salvoRepViagem = DATABASE.lerBaseViagem(1);
-			Gerente salvoGerente = DATABASE.lerBaseGerente(1);
+			IRepositorio<Motorista> salvoRepMotor = DATABASE.lerBaseMotorista();
+			IRepositorio<Solicitante> salvoRepSoli = DATABASE.lerBaseSolicitante();
+			IRepositorio<Viagem> salvoRepViagem = DATABASE.lerBaseViagem();
+			Gerente salvoGerente = DATABASE.lerBaseGerente();
 			
 			// Imprimindo o que foi lido
 			System.out.println("\nInformações salvas na base de dados:");

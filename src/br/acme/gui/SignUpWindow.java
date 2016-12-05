@@ -136,7 +136,7 @@ public class SignUpWindow extends MainWindow {
 			DateFormat frmt = new SimpleDateFormat("dd/MM/yyyy");
 			try{
 				Solicitante novoSoli = new Solicitante(infos[1], infos[2], infos[3], infos[4], infos[5], frmt.parse(infos[6]), infos[7]);
-				IRepositorio<Solicitante> repSoli = DATABASE.lerBaseSolicitante(1);
+				IRepositorio<Solicitante> repSoli = DATABASE.lerBaseSolicitante();
 				repSoli.adicionar(novoSoli);
 				return true;
 			}catch(Exception e){
@@ -146,7 +146,7 @@ public class SignUpWindow extends MainWindow {
 		case "Motorista":
 			try{
 				Motorista novoMotor = new Motorista(infos[1], infos[2], infos[3], infos[4], infos[5], true);
-				IRepositorio<Motorista> repMotor = DATABASE.lerBaseMotorista(1);
+				IRepositorio<Motorista> repMotor = DATABASE.lerBaseMotorista();
 				repMotor.adicionar(novoMotor);
 				return true;
 			}catch(Exception e){
@@ -156,7 +156,7 @@ public class SignUpWindow extends MainWindow {
 		case "Gerente":
 			try{
 				Gerente novoGerente = new Gerente(infos[1], infos[2], infos[3], infos[4], infos[5]);
-				Gerente gerente = DATABASE.lerBaseGerente(1);
+				Gerente gerente = DATABASE.lerBaseGerente();
 				if(gerente!=null){
 					new AlertWindow().display("Já existe um gerente cadastrado");
 					return false;
