@@ -31,7 +31,7 @@ public class LoginWindow extends MainWindow {
 		
 		/////////////// Layout Config ///////////////
 		root.setCenter(loginBox);
-		BorderPane.setMargin(loginBox, new Insets(-50, 10, 10, 10));// Centralize
+		BorderPane.setMargin(loginBox, new Insets(-30, 10, 10, 10));// Centralize
 			loginBox.getChildren().addAll(mainTitle, subTitle,userInput, passInput, btnBox);
 			loginBox.setAlignment(Pos.CENTER);
 			loginBox.setMaxWidth(300);
@@ -56,7 +56,7 @@ public class LoginWindow extends MainWindow {
 					});
 		
 		/////////////// Scene Config ///////////////
-		loginScene = new Scene(root, 800, 500);
+		loginScene = new Scene(root, 500, 400);
 		loginScene.getStylesheets().add(getCssFile());
 		
 		/////////////// Stage Config ///////////////

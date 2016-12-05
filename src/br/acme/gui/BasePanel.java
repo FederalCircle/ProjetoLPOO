@@ -1,18 +1,7 @@
 package br.acme.gui;
 
-import java.util.ArrayList;
-
-
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.javafx.jmx.MXNodeAlgorithm;
-import com.sun.javafx.jmx.MXNodeAlgorithmContext;
-import com.sun.javafx.sg.prism.NGNode;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.*;
 import javafx.scene.*;
@@ -29,9 +18,10 @@ public class BasePanel extends MainWindow {
 			private Button logoutButton;
 			private Button exitButton;
 		private VBox menuBox;
-			private ArrayList<Button> optionsMenu;
+			private Label lblMenu;
 		private VBox contentBox;
 			private HBox contentNav;
+				private Label lblNavTitle;
 			private VBox contentDisplay;
 		private HBox footerBox;
 			private Node credits;
@@ -66,11 +56,17 @@ public class BasePanel extends MainWindow {
 	public void setExitButton(Button exitButton) {
 		this.exitButton = exitButton;
 	}
-	public ArrayList<Button> getOptionsMenu() {
-		return optionsMenu;
+	public Label getLblMenu() {
+		return lblMenu;
 	}
-	public void setOptionsMenu(ArrayList<Button> optionsMenu) {
-		this.optionsMenu = optionsMenu;
+	public void setLblMenu(Label lblMenu) {
+		this.lblMenu = lblMenu;
+	}
+	public Label getLblNavTitle() {
+		return lblNavTitle;
+	}
+	public void setLblNavTitle(Label lblNavTitle) {
+		this.lblNavTitle = lblNavTitle;
 	}
 	public HBox getContentNav() {
 		return contentNav;
@@ -116,13 +112,14 @@ public class BasePanel extends MainWindow {
 				controlButtonBox = new HBox(10);
 					logoutButton = new Button("Desconectar", getCheckIcon());
 					exitButton = new Button("Fechar", getCancelIcon());
-			menuBox = new VBox(10);
-				optionsMenu = new ArrayList<Button>();
+			menuBox = new VBox();
+				lblMenu = new Label("Menu");
 			contentBox = new VBox();
 				contentNav = new HBox(10);
+				lblNavTitle = new Label();
 				contentDisplay = new VBox(10);
 			footerBox = new HBox(10);
-				credits = new Label("credits");
+				credits = new Label("Grupo: Alyson Maia e Douglas Bezerra");
 		
 		root.setTop(headerBox);
 		root.setLeft(menuBox);
@@ -133,7 +130,7 @@ public class BasePanel extends MainWindow {
 				logo.getStyleClass().addAll("lb-large", "bold");
 				controlButtonBox.getChildren().addAll(logoutButton, exitButton);
 				controlButtonBox.setAlignment(Pos.CENTER_RIGHT);
-				controlButtonBox.setMinWidth(610);
+				controlButtonBox.setMinWidth(400);
 					logoutButton.setOnAction(new EventHandler<ActionEvent>(){
 							public void handle(ActionEvent event) {
 								new LoginWindow().display();
@@ -145,19 +142,23 @@ public class BasePanel extends MainWindow {
 							window.close();
 						}
 					});
-			menuBox.getChildren().addAll(optionsMenu);
-			menuBox.getStyleClass().add("border-box");
+			menuBox.getChildren().addAll(lblMenu);
+			menuBox.getStyleClass().add("border-box-nopadding");
 			menuBox.setMinWidth(200);
+			menuBox.setAlignment(Pos.TOP_CENTER);
+				lblMenu.getStyleClass().add("bold");
 			contentBox.getChildren().addAll(contentNav, contentDisplay);
 			contentBox.getStyleClass().add("border-box");
-				contentNav.getStyleClass().add("border-box-no-space");
+				contentNav.getStyleClass().addAll("border-box-no-space", "bold");
+				contentNav.setAlignment(Pos.CENTER);
+				contentNav.getChildren().add(lblNavTitle);
 				contentDisplay.getStyleClass().add("border-box-no-space");
 				contentDisplay.prefHeightProperty().bind(contentBox.heightProperty());
 			footerBox.getChildren().add(credits);
 			footerBox.getStyleClass().add("border-box");
 			footerBox.setAlignment(Pos.CENTER);
 
-		page = new Scene(root, 900, 650);
+		page = new Scene(root, 700, 500);
 		page.getStylesheets().add(getCssFile());
 		window = new Stage();
 		window.setScene(page);

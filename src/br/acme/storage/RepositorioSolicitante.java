@@ -48,10 +48,11 @@ public class RepositorioSolicitante implements IRepositorio,Serializable {
 		int i=0;// Índice do elemento no Array
 		for(Solicitante elemento: listaSolicitante){
 			if(elemento!=null){
-				/*if(elemento.getId()==((Solicitante)novoSolicitante).getId())
-					throw new RepositorioException("Ja existe alguém com essa ID");*/
-				if(elemento.getCpf()==((Solicitante)novoSolicitante).getCpf())
-					throw new RepositorioException("Ja existe alguém com esse CPF");
+				if(elemento.getId()==((Solicitante)novoSolicitante).getId())
+					throw new RepositorioException("Ja existe alguém com essa ID");
+				if(elemento.getEmail().equals(((Solicitante)novoSolicitante).getEmail()))
+					throw new RepositorioException("Ja existe alguém com esse Email");
+				
 				else
 					i++;
 			}

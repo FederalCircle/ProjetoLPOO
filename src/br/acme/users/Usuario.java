@@ -56,7 +56,6 @@ public abstract class Usuario implements Serializable {
 	public String getSenha(){
 		return senha;
 	}
-	
 	public void setSenha(String senha) throws UsersExceptions{
 		if(senha==null||senha.equals(""))throw new NullStringException("Senha"); else this.senha =senha;
 	}
