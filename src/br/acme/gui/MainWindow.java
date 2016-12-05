@@ -13,6 +13,16 @@ public class MainWindow extends Application {
 	private final ImageView cancelIcon = new ImageView(new Image(rscPath+"icons/remove-button.png"));
 	private final String cssFile = this.getClass().getResource("resources/mainStyle.css").toExternalForm();
 	
+	/////////////// Defaults ///////////////
+	public MainWindow(){
+		checkIcon.setFitHeight(20);
+		checkIcon.setFitWidth(20);
+		signIcon.setFitHeight(20);
+		signIcon.setFitWidth(20);
+		cancelIcon.setFitHeight(20);
+		cancelIcon.setFitWidth(20);
+	}
+	
 	/////////////// Getters ///////////////
 	public ImageView getCheckIcon() {
 		return checkIcon;
@@ -32,6 +42,6 @@ public class MainWindow extends Application {
 		launch(args);
 	}
 	public void start(Stage window){
-		new LoginWindow().display();
+		new SolicitantePanel().display();
 	}
 }

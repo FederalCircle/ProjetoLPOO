@@ -11,6 +11,10 @@ import javafx.scene.layout.*;
 
 public class LoginWindow extends MainWindow {
 	
+	public LoginWindow(){
+		super();
+	}
+	
 	public LoginWindow display(){
 		Stage window = new Stage();
 		Scene loginScene;
@@ -25,15 +29,8 @@ public class LoginWindow extends MainWindow {
 					Button loginButton = new Button("Login", getCheckIcon());
 					Button signUpButton = new Button("Sign Up", getSignIcon());
 		
-		/////////////// Image Config ///////////////
-		getCheckIcon().setFitHeight(20);
-		getCheckIcon().setFitWidth(20);
-		getSignIcon().setFitHeight(20);
-		getSignIcon().setFitWidth(20);
-		
 		/////////////// Layout Config ///////////////
 		root.setCenter(loginBox);
-		root.requestFocus();
 		BorderPane.setMargin(loginBox, new Insets(-50, 10, 10, 10));// Centralize
 			loginBox.getChildren().addAll(mainTitle, subTitle,userInput, passInput, btnBox);
 			loginBox.setAlignment(Pos.CENTER);

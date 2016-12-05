@@ -17,8 +17,11 @@ import br.acme.exception.*;
 import br.acme.storage.*;
 
 public class SignUpWindow extends MainWindow {
-
-	//public void start(Stage window){
+	
+	public SignUpWindow(){
+		super();
+	}
+	
 	public void display() {
 		Stage window = new Stage();
 		Scene signUpScene;
@@ -40,13 +43,7 @@ public class SignUpWindow extends MainWindow {
 				HBox btnBox = new HBox(10);
 					Button confirmButton = new Button("OK", getCheckIcon());
 					Button cancelButton = new Button("Cancel", getCancelIcon());
-		
-		/////////////// Image Config ///////////////
-		getCheckIcon().setFitHeight(20);
-		getCheckIcon().setFitWidth(20);
-		getCancelIcon().setFitHeight(20);
-		getCancelIcon().setFitWidth(20);
-				
+			
 		/////////////// Layout Config ///////////////
 		root.setCenter(signUpBox);
 		root.requestFocus();
@@ -142,12 +139,6 @@ public class SignUpWindow extends MainWindow {
 				IRepositorio<Solicitante> repSoli = DATABASE.lerBaseSolicitante(1);
 				repSoli.adicionar(novoSoli);
 				return true;
-			}catch(UsersExceptions e){
-				new AlertWindow().display(e.getMessage());
-				return false;
-			}catch(RepositorioException e){
-				new AlertWindow().display(e.getMessage());
-				return false;
 			}catch(Exception e){
 				new AlertWindow().display(e.getMessage());
 				return false;
@@ -158,18 +149,24 @@ public class SignUpWindow extends MainWindow {
 				IRepositorio<Motorista> repMotor = DATABASE.lerBaseMotorista(1);
 				repMotor.adicionar(novoMotor);
 				return true;
-			}catch(UsersExceptions e){
-				new AlertWindow().display(e.getMessage());
-				return false;
-			}catch(RepositorioException e){
-				new AlertWindow().display(e.getMessage());
-				return false;
 			}catch(Exception e){
 				new AlertWindow().display(e.getMessage());
 				return false;
 			}
 		case "Gerente":
-			break;
+			try{
+				Gerente novoGerente = new Gerente(infos[1], infos[2], infos[3], infos[4], infos[5]);
+				Gerente gerente = DATABASE.lerBaseGerente(1);
+				if(gerente!=null){
+					new AlertWindow().display("Já existe um gerente cadastrado");
+					return false;
+				}
+				DATABASE.salvarEstado(novoGerente);
+				return true;
+			}catch(Exception e){
+				new AlertWindow().display(e.getMessage());
+				return false;
+			}
 		}
 		return false;
 	}
