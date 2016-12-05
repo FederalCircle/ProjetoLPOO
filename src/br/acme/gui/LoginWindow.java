@@ -1,5 +1,12 @@
 package br.acme.gui;
 
+import br.acme.exception.RepositorioException;
+import br.acme.storage.DATABASE;
+import br.acme.storage.IRepositorio;
+import br.acme.users.Gerente;
+import br.acme.users.Motorista;
+import br.acme.users.Solicitante;
+import br.acme.users.Usuario;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -9,6 +16,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
+@SuppressWarnings("unchecked")
 public class LoginWindow extends MainWindow {
 	
 	public LoginWindow(){
@@ -45,8 +53,24 @@ public class LoginWindow extends MainWindow {
 				btnBox.setAlignment(Pos.CENTER);
 					loginButton.setOnAction(new EventHandler<ActionEvent>(){
 						public void handle(ActionEvent event) {
-							new SolicitantePanel().display();
-							window.close();
+							Usuario user = login(userInput.getText(), passInput.getText());
+							if(user != null){
+								switch (user.getClass().getSimpleName()) {
+								case "Solicitante":
+									Solicitante sol = (Solicitante) user;
+									new SolicitantePanel().display(sol);
+									break;
+								case "Motorista":
+									break;
+								case "Gerente":
+									break;
+								}
+								window.close();
+							}
+							else{
+								new AlertWindow().display("Email e/ou senha incorreto(s).");
+							}
+							
 						}
 					});
 					signUpButton.setOnAction(new EventHandler<ActionEvent>(){
@@ -65,5 +89,29 @@ public class LoginWindow extends MainWindow {
 		window.setScene(loginScene);
 		window.show();
 		return this;
+	}
+	
+	private Usuario login(String email, String senha){
+		IRepositorio<Solicitante> repSol = DATABASE.lerBaseSolicitante();
+		IRepositorio<Motorista> repMot = DATABASE.lerBaseMotorista();
+		Gerente ger = DATABASE.lerBaseGerente();
+		try {
+			for(Solicitante s : repSol.buscarTodos()){
+				if(s==null)break;
+				if(s.getEmail().equals(email) && s.getSenha().equals(senha))
+					return s;
+			}
+		} catch (RepositorioException e) {}
+		try {
+			for(Motorista m : repMot.buscarTodos()){
+				if(m==null)break;
+				if(m.getEmail().equals(email) && m.getSenha().equals(senha))
+					return m;
+			}
+		} catch (RepositorioException e) {}
+		if(ger.getEmail().equals(email) && ger.getSenha().equals(senha))
+			return ger;
+		
+		return null;
 	}
 }

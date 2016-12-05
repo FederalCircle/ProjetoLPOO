@@ -42,6 +42,6 @@ public class MainWindow extends Application {
 		launch(args);
 	}
 	public void start(Stage window){
-		new SolicitantePanel().display();
+		new LoginWindow().display();
 	}
 }
