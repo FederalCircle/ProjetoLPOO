@@ -20,13 +20,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 public class SolicitantePanel extends BasePanel{
-	
+	Solicitante user;
 	
 	public SolicitantePanel() {
 		super("Painel do Solicitante");
 	}
 	
 	void display(Solicitante user) {
+		this.user=user;
 		//////////////////// Buttons ////////////////////
 		Button btnHome = new Button("Home");
 		Button btnPedirCarona = new Button("Pedir Carona");
@@ -135,6 +136,20 @@ public class SolicitantePanel extends BasePanel{
         	getContentDisplay().getChildren().add(new Label("Não há motoristas disponíveis no momento"));
         }
         return motoristas;
+    }
+	private ObservableList<Viagem> getViagens(){
+        ObservableList<Viagem> viagens = FXCollections.observableArrayList();
+        
+        try{
+	        for(Viagem v : user.getViagens().buscarTodos()){
+	        	if(v==null) break;
+	        	viagens.add(v);
+	        }
+        }catch(RepositorioException e){
+        	getContentDisplay().getChildren().clear();
+        	getContentDisplay().getChildren().add(new Label("Não há viagens regisradas."));
+        }
+        return viagens;
     }
 	
 }

@@ -1,6 +1,10 @@
 package br.acme.gui;
 
 
+import java.util.Date;
+
+import br.acme.exception.UsersExceptions;
+import br.acme.users.Solicitante;
 import javafx.application.Application;
 import javafx.stage.*;
 import javafx.scene.image.*;
@@ -42,6 +46,13 @@ public class MainWindow extends Application {
 		launch(args);
 	}
 	public void start(Stage window){
-		new LoginWindow().display();
+		//new LoginWindow().display();
+		/**/
+		try {
+			new SolicitantePanel().display(new Solicitante("407.087.551-43", "paula@travel.com", "paula123", "Paula", "Feminino", new Date(), "99112233"));
+		} catch (UsersExceptions e) {
+			e.printStackTrace();
+		}
+		/**/
 	}
 }

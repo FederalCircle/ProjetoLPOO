@@ -48,7 +48,7 @@ public class Solicitante extends Usuario {
 		if(getSenha().equals(senha)) this.lugares = lugares;
 	}
 
-	public IRepositorio getViagens() {
+	public IRepositorio<Viagem> getViagens() {
 		return viagens;
 	}
 
