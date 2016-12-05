@@ -45,7 +45,8 @@ public class LoginWindow extends MainWindow {
 				btnBox.setAlignment(Pos.CENTER);
 					loginButton.setOnAction(new EventHandler<ActionEvent>(){
 						public void handle(ActionEvent event) {
-							
+							new SolicitantePanel().display();
+							window.close();
 						}
 					});
 					signUpButton.setOnAction(new EventHandler<ActionEvent>(){

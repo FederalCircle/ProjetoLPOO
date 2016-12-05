@@ -2,10 +2,10 @@ package br.acme.gui;
 
 public class SolicitantePanel extends BasePanel{
 	public SolicitantePanel() {
-		super();
+		super("Painel do Solicitante");
 	}
 	
 	void display() {
-		window.show();
+		getWindow().show();
 	}
 }

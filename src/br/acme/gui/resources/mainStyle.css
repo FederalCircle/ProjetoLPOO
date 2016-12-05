@@ -14,7 +14,14 @@
 	-fx-padding: 10;
     -fx-border-style: solid inside;
     -fx-border-width: 2;
-    -fx-border-insets: 5;
+    -fx-border-insets: 2;
+    -fx-border-radius: 5;
+    -fx-border-color: black
+}
+.border-box-no-space{
+	-fx-padding: 10;
+    -fx-border-style: solid inside;
+    -fx-border-width: 0.5;
     -fx-border-radius: 5;
     -fx-border-color: black
 }
