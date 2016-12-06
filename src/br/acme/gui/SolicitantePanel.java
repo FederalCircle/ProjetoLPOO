@@ -102,6 +102,7 @@ public class SolicitantePanel extends BasePanel{
 			public void handle(ActionEvent event) {
 				getContentDisplay().getChildren().clear();
 				getLblNavTitle().setText("Listar Viagens");
+				getContentDisplay().getChildren().add(tableViagens);
 			}
 		});
 		btnAlterarDados.setOnAction(new EventHandler<ActionEvent>(){
@@ -137,6 +138,7 @@ public class SolicitantePanel extends BasePanel{
         }
         return motoristas;
     }
+	
 	private ObservableList<Viagem> getViagens(){
         ObservableList<Viagem> viagens = FXCollections.observableArrayList();
         
