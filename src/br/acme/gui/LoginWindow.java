@@ -45,10 +45,8 @@ public class LoginWindow extends MainWindow {
 			loginBox.setMaxWidth(300);
 				mainTitle.getStyleClass().addAll("lb-large", "bold");
 				userInput.setPromptText("Email");
-				userInput.setFocusTraversable(false);// Mantém desselecionado
 				userInput.setMask("M!@M!.P!");
 				passInput.setPromptText("Senha");
-				passInput.setFocusTraversable(false);
 				btnBox.getChildren().addAll(loginButton, signUpButton);
 				btnBox.setAlignment(Pos.CENTER);
 					loginButton.setOnAction(new EventHandler<ActionEvent>(){

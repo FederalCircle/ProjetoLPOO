@@ -62,6 +62,11 @@ public class TesteDataBase {
 			System.out.println(salvoRepSoli.buscar(3).toString());
 			System.out.println(salvoRepViagem.buscar(1).toString());
 			System.out.println(salvoGerente.toString());
+			
+			for(Viagem v : salvoRepSoli.buscar(3).getViagens().buscarTodos()){
+				if(v==null)break;
+				System.out.println(v.getDestino());
+			}
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());

@@ -79,17 +79,13 @@ public class SignUpWindow extends MainWindow {
 						}
 					});
 				nameInput.setPromptText("Nome");
-				nameInput.setFocusTraversable(false);
 				cpfInput.setPromptText("CPF");
-				cpfInput.setFocusTraversable(false);
 				cpfInput.setMask("NNN.NNN.NNN-NN");
 				genderInput.setPromptText("Sexo");
-				genderInput.setFocusTraversable(false);
 				emailInput.setPromptText("Email");
-				emailInput.setFocusTraversable(false);
 				emailInput.setMask("M!@I!.P!");
 				passInput.setPromptText("Senha");
-				passInput.setFocusTraversable(false);
+				
 				// Buttons
 				btnBox.getChildren().addAll(confirmButton, cancelButton);
 				btnBox.setAlignment(Pos.CENTER);

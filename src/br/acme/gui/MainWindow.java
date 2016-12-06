@@ -46,8 +46,8 @@ public class MainWindow extends Application {
 		launch(args);
 	}
 	public void start(Stage window){
-		new LoginWindow().display();
-		/*/
+		//new LoginWindow().display();
+		/**/
 		try {
 			new SolicitantePanel().display(new Solicitante("407.087.551-43", "paula@travel.com", "paula123", "Paula", "Feminino", new Date(), "99112233"));
 		} catch (UsersExceptions e) {

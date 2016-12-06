@@ -1,6 +1,7 @@
 package br.acme.gui;
 
 import br.acme.exception.RepositorioException;
+import br.acme.location.Lugar;
 import br.acme.location.Viagem;
 import br.acme.storage.DATABASE;
 import br.acme.storage.IRepositorio;
@@ -13,10 +14,14 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class SolicitantePanel extends BasePanel{
@@ -28,6 +33,7 @@ public class SolicitantePanel extends BasePanel{
 	
 	void display(Solicitante user) {
 		this.user=user;
+		
 		//////////////////// Buttons ////////////////////
 		Button btnHome = new Button("Home");
 		Button btnPedirCarona = new Button("Pedir Carona");
@@ -65,20 +71,67 @@ public class SolicitantePanel extends BasePanel{
 		TableColumn<Viagem, Long> clmIdViagem = new TableColumn<>("ID");
 		clmIdViagem.setCellValueFactory(new PropertyValueFactory<>("id"));
 		
-		TableColumn<Viagem, String> clmMotorista = new TableColumn<>("Motorista");
-		clmNome.setCellValueFactory(new PropertyValueFactory<>("motorista.getNome()"));
+		TableColumn<Viagem, Motorista> clmMotorista = new TableColumn<>("Motorista");
+		clmNome.setCellValueFactory(new PropertyValueFactory<>("motorista.nome"));
 		
-		TableColumn<Viagem, String> clmOrigem = new TableColumn<>("Origem");
-		clmEmail.setCellValueFactory(new PropertyValueFactory<>("origem"));
+		TableColumn<Viagem, Lugar> clmOrigem = new TableColumn<>("Origem");
+		clmEmail.setCellValueFactory(new PropertyValueFactory<>("endereço"));
 		
-		TableColumn<Viagem, String> clmDestino = new TableColumn<>("Destino");
+		TableColumn<Viagem, Lugar> clmDestino = new TableColumn<>("Destino");
 		clmEmail.setCellValueFactory(new PropertyValueFactory<>("destino"));
         
-		TableView<Viagem> tableViagens = new TableView<>();
+		TableView<Viagem> tableViagens = new TableView<>(getViagens());
 		tableViagens.getColumns().addAll(clmIdViagem, clmMotorista, clmOrigem, clmDestino);
 		
 		//////////////////// Alterar Dados Page ////////////////////
-		
+		VBox boxAlterarDados = new VBox(10);
+			HBox bedrock = new HBox(10);	
+				VBox leftBox = new VBox(10);
+					TextField nameInput = new TextField();
+					MaskTextField cpfInput = new MaskTextField();
+					ComboBox<String> genderInput = new ComboBox<String>();
+					MaskTextField emailInput = new MaskTextField();
+					PasswordField passInput = new PasswordField();
+					MaskTextField nascInput = new MaskTextField();
+					MaskTextField phoneInput = new MaskTextField();
+				VBox rightBox = new VBox(10);
+			HBox btnBox = new HBox(10);
+				Button confirmButton = new Button("Salvar", getCheckIcon());
+				Button cancelButton = new Button("Cancelar", getCancelIcon());
+			
+		// Config controls
+		boxAlterarDados.getChildren().addAll(bedrock, btnBox);
+			bedrock.getChildren().addAll(leftBox, rightBox);
+				leftBox.getChildren().addAll(nameInput, cpfInput, emailInput, passInput);
+					nameInput.setPromptText("Nome");
+					nameInput.setText(user.getNome());
+					cpfInput.setPromptText("CPF");
+					cpfInput.setText(user.getCpf());
+					cpfInput.setMask("NNN.NNN.NNN-NN");
+					emailInput.setPromptText("Email");
+					emailInput.setMask("M!@I!.P!");
+					emailInput.setText(user.getEmail());
+					passInput.setPromptText("Senha");
+					passInput.setText(user.getSenha());
+				rightBox.getChildren().addAll(genderInput, nascInput, phoneInput);
+					genderInput.getItems().addAll("Masculino","Feminino");
+					genderInput.getSelectionModel().select(user.getSexo());
+					nascInput.setMask("NN/NN/NNNN");
+					nascInput.setPromptText("Data de Nascimento");
+					phoneInput.setMask("NNNNN-NNNN");
+					phoneInput.setPromptText("Número de Celular");
+			btnBox.getChildren().addAll(confirmButton, cancelButton);
+			btnBox.setAlignment(Pos.CENTER);
+				confirmButton.setOnAction(new EventHandler<ActionEvent>(){
+					public void handle(ActionEvent event) {
+						
+					}
+				});
+				cancelButton.setOnAction(new EventHandler<ActionEvent>(){
+					public void handle(ActionEvent event) {
+						
+					}
+				});
 		
 		//////////////////// Excluir Conta Page ////////////////////
 		
@@ -109,6 +162,7 @@ public class SolicitantePanel extends BasePanel{
 			public void handle(ActionEvent event) {
 				getContentDisplay().getChildren().clear();
 				getLblNavTitle().setText("Alterar Dados");
+				getContentDisplay().getChildren().add(boxAlterarDados);
 			}
 		});
 		btnExcluirConta.setOnAction(new EventHandler<ActionEvent>(){
@@ -145,11 +199,11 @@ public class SolicitantePanel extends BasePanel{
         try{
 	        for(Viagem v : user.getViagens().buscarTodos()){
 	        	if(v==null) break;
+	        	System.out.println(v.getMotorista().getNome());
 	        	viagens.add(v);
 	        }
         }catch(RepositorioException e){
-        	getContentDisplay().getChildren().clear();
-        	getContentDisplay().getChildren().add(new Label("Não há viagens regisradas."));
+        	
         }
         return viagens;
     }
