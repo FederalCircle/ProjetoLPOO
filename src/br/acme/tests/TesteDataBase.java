@@ -2,6 +2,9 @@ package br.acme.tests;
 import br.acme.users.*;
 import br.acme.storage.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.acme.location.*;
@@ -9,7 +12,13 @@ import br.acme.location.*;
 public class TesteDataBase {
 	
 	public static void main(String[] args){
-		Date dataNascimento = new Date();// necessário para Solicitante
+		DateFormat frmt = new SimpleDateFormat("dd/MM/yyyy");
+		Date dataNascimento=null;
+		try {
+			dataNascimento = frmt.parse("01/01/1990");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		try{
 			// Criando o repositório de solicitantes
 			IRepositorio<Solicitante> repSolicitante = new RepositorioSolicitante();
@@ -40,9 +49,9 @@ public class TesteDataBase {
 			repSolicitante.adicionar(solAndre);
 			
 			// Solicitando as caronas
-			solPaula.solicitarCarona(gerente.getRepMotor(), inicio, fim, "Cartão");
-			solPedro.solicitarCarona(gerente.getRepMotor(), inicio, fim, "à Vista");
-			solAndre.solicitarCarona(gerente.getRepMotor(), inicio, fim, "Cheque");
+			solPaula.solicitarCarona(motJose, inicio, fim, "Cartão");
+			solPedro.solicitarCarona(motAna, inicio, fim, "à Vista");
+			solAndre.solicitarCarona(motMaria, inicio, fim, "Cheque");
 			
 			// Salvando na Database
 			DATABASE.salvarEstado(gerente);

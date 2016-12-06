@@ -1,10 +1,17 @@
 package br.acme.gui;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.plaf.basic.BasicTreeUI.SelectionModelPropertyChangeHandler;
+
 import br.acme.exception.RepositorioException;
 import br.acme.location.Lugar;
 import br.acme.location.Viagem;
 import br.acme.storage.DATABASE;
 import br.acme.storage.IRepositorio;
+import br.acme.storage.RepositorioSolicitante;
 import br.acme.users.Motorista;
 import br.acme.users.Solicitante;
 import javafx.collections.FXCollections;
@@ -18,6 +25,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -66,21 +74,31 @@ public class SolicitantePanel extends BasePanel{
         
 		TableView<Motorista> tableMotorista = new TableView<>(getMotoristas());
 		tableMotorista.getColumns().addAll(clmIdMotor, clmNome, clmEmail);
-		
+		tableMotorista.setRowFactory( tv -> {
+		    TableRow<Motorista> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Motorista rowData = row.getItem();
+		            System.out.println(rowData.getNome());
+		            selectCarona(rowData);
+		        }
+		    });
+		    return row ;
+		});
 		//////////////////// Listar Viagens Page ////////////////////
-		TableColumn<Viagem, Long> clmIdViagem = new TableColumn<>("ID");
+		TableColumn<eViagem, Long> clmIdViagem = new TableColumn<>("ID");
 		clmIdViagem.setCellValueFactory(new PropertyValueFactory<>("id"));
 		
-		TableColumn<Viagem, Motorista> clmMotorista = new TableColumn<>("Motorista");
-		clmNome.setCellValueFactory(new PropertyValueFactory<>("motorista.nome"));
+		TableColumn<eViagem, String> clmMotorista = new TableColumn<>("Motorista");
+		clmNome.setCellValueFactory(new PropertyValueFactory<>("motorista"));
 		
-		TableColumn<Viagem, Lugar> clmOrigem = new TableColumn<>("Origem");
-		clmEmail.setCellValueFactory(new PropertyValueFactory<>("endereço"));
+		TableColumn<eViagem, String> clmOrigem = new TableColumn<>("Origem");
+		clmEmail.setCellValueFactory(new PropertyValueFactory<>("origem"));
 		
-		TableColumn<Viagem, Lugar> clmDestino = new TableColumn<>("Destino");
+		TableColumn<eViagem, String> clmDestino = new TableColumn<>("Destino");
 		clmEmail.setCellValueFactory(new PropertyValueFactory<>("destino"));
         
-		TableView<Viagem> tableViagens = new TableView<>(getViagens());
+		TableView<eViagem> tableViagens = new TableView<>(getViagens());
 		tableViagens.getColumns().addAll(clmIdViagem, clmMotorista, clmOrigem, clmDestino);
 		
 		//////////////////// Alterar Dados Page ////////////////////
@@ -118,23 +136,73 @@ public class SolicitantePanel extends BasePanel{
 					genderInput.getSelectionModel().select(user.getSexo());
 					nascInput.setMask("NN/NN/NNNN");
 					nascInput.setPromptText("Data de Nascimento");
+					nascInput.setText(new SimpleDateFormat("dd/MM/yyyy").format(user.getDataNascimento()));
 					phoneInput.setMask("NNNNN-NNNN");
 					phoneInput.setPromptText("Número de Celular");
+					phoneInput.setText(user.getNumeroCelular());
 			btnBox.getChildren().addAll(confirmButton, cancelButton);
 			btnBox.setAlignment(Pos.CENTER);
 				confirmButton.setOnAction(new EventHandler<ActionEvent>(){
 					public void handle(ActionEvent event) {
-						
+						String cpf = cpfInput.getText();
+						String email = emailInput.getText();
+						String senha = passInput.getText();
+						String nome = nameInput.getText();
+						String sexo = genderInput.getValue(); 
+						Date dataNascimento = null;
+						try {
+							dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(nascInput.getText());
+						} catch (ParseException e) {
+							new AlertWindow().display(e.getMessage());
+						}
+						String numeroCelular = phoneInput.getText();
+						try{
+							Solicitante alterado = new Solicitante(cpf, email, senha, nome, sexo, dataNascimento, numeroCelular);
+							IRepositorio<Solicitante> repSol = DATABASE.lerBaseSolicitante();
+							repSol.alterar(user.getId(), alterado);
+							DATABASE.salvarEstado(repSol);
+							new SolicitantePanel().display(alterado);
+							getWindow().close();
+						}catch(Exception e){
+							new AlertWindow().display(e.getMessage());
+						}
 					}
 				});
 				cancelButton.setOnAction(new EventHandler<ActionEvent>(){
 					public void handle(ActionEvent event) {
-						
+						new SolicitantePanel().display(user);
+						getWindow().close();
 					}
 				});
 		
 		//////////////////// Excluir Conta Page ////////////////////
-		
+		VBox excluirBox = new VBox();
+			Label aviso = new Label("Confirme sua senha para excluir sua conta.");
+			PasswordField senha = new PasswordField();
+			Button btnConfirm = new Button("EXCLUIR CONTA");
+			
+		excluirBox.getChildren().addAll(aviso, senha, btnConfirm);
+			aviso.getStyleClass().addAll("lbl-large","bold");
+			senha.setPromptText("Senha");
+			btnConfirm.setOnAction(new EventHandler<ActionEvent>(){
+				public void handle(ActionEvent event) {
+					if(senha.getText().equals(user.getSenha())){
+						IRepositorio<Solicitante> repSol = DATABASE.lerBaseSolicitante();
+						try {
+							repSol.remover(user.getId());
+						} catch (RepositorioException e) {
+							e.printStackTrace();
+						}
+						DATABASE.salvarEstado(repSol);
+						new LoginWindow().display();
+						getWindow().close();
+					}
+					else{
+						new AlertWindow().display("Senha incorreta!");
+						senha.clear();
+					}
+				}
+			});
 		
 		//////////////////// Btn Actions ////////////////////
 		btnHome.setOnAction(new EventHandler<ActionEvent>(){
@@ -169,6 +237,7 @@ public class SolicitantePanel extends BasePanel{
 			public void handle(ActionEvent event) {
 				getContentDisplay().getChildren().clear();
 				getLblNavTitle().setText("Excluir Conta");
+				getContentDisplay().getChildren().add(excluirBox);
 			}
 		});
 		
@@ -193,19 +262,52 @@ public class SolicitantePanel extends BasePanel{
         return motoristas;
     }
 	
-	private ObservableList<Viagem> getViagens(){
-        ObservableList<Viagem> viagens = FXCollections.observableArrayList();
+	private ObservableList<eViagem> getViagens(){
+        ObservableList<eViagem> infoviagens = FXCollections.observableArrayList();
         
         try{
 	        for(Viagem v : user.getViagens().buscarTodos()){
 	        	if(v==null) break;
-	        	System.out.println(v.getMotorista().getNome());
-	        	viagens.add(v);
+	        	eViagem ev = new eViagem(v.getId(), v.getMotorista().getNome(), v.getOrigem().getEndereco()
+	        			, v.getDestino().getEndereco());
+	        	infoviagens.add(ev);
 	        }
         }catch(RepositorioException e){
         	
         }
-        return viagens;
+        return infoviagens;
     }
 	
+	private void selectCarona(Motorista motor){
+		VBox infosCaronaBox = new VBox(10);
+			TextField origem = new TextField();
+			TextField idOrigem = new TextField();
+			TextField destino = new TextField();
+			TextField idDestino = new TextField();
+			ComboBox<String> formaPagamento = new ComboBox<>();
+			Button btnCarona = new Button("Solicitar Carona");
+		
+		infosCaronaBox.getChildren().addAll(origem, idOrigem, destino, idDestino, btnCarona);
+		infosCaronaBox.setAlignment(Pos.CENTER);
+			origem.setPromptText("Endereço de Partida");
+			idOrigem.setPromptText("Identificador de Partida");
+			destino.setPromptText("Endereço de Destino");
+			idDestino.setPromptText("Identificador de Destino");
+			formaPagamento.getItems().addAll("À Vista", "Cartão");
+			formaPagamento.setPromptText("Forma de Pagamento");
+			btnCarona.setOnAction(new EventHandler<ActionEvent>(){
+				public void handle(ActionEvent event) {
+					try {
+						user.solicitarCarona(motor, new Lugar(origem.getText(), idOrigem.getText())
+								, new Lugar(destino.getText(), idDestino.getText()), formaPagamento.getValue());
+						getContentDisplay().getChildren().clear();
+						getContentDisplay().getChildren().add(infosCaronaBox);
+					} catch (RepositorioException e) {
+						new AlertWindow().display(e.getMessage());
+					}
+				}
+			});
+		getContentDisplay().getChildren().clear();
+		getContentDisplay().getChildren().add(infosCaronaBox);
+	}
 }

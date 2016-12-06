@@ -85,16 +85,10 @@ public class Solicitante extends Usuario {
 	}
 
 	// Métodos ----------------------------------------------------------------------------------------------------
-	public void solicitarCarona(IRepositorio<Motorista> iRepositorio, Lugar inicio, Lugar fim, String formaPagamento) throws RepositorioException{
-		for(Motorista motor : iRepositorio.buscarTodos()){
-			if( motor.isDisponivel()== true){ 
-				Viagem nova =  motor.responderPedido(this, inicio, fim, formaPagamento);
-				viagens.adicionar(nova);
-				this.saldo-=nova.getValorViagem();
-				break;		
-			}
-		}
-		
+	public void solicitarCarona(Motorista motor, Lugar inicio, Lugar fim, String formaPagamento) throws RepositorioException{
+		Viagem nova =  motor.responderPedido(this, inicio, fim, formaPagamento);
+		viagens.adicionar(nova);
+		this.saldo-=nova.getValorViagem();
 	}
 	
 	@SuppressWarnings("deprecation")

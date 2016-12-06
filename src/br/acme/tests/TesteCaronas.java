@@ -40,9 +40,9 @@ public class TesteCaronas {
 			repSolicitante.adicionar(solAndre);
 			
 			//Solicitando as caronas
-			solPaula.solicitarCarona(gerente.getRepMotor(), inicio, fim, "Cartão");
-			solPedro.solicitarCarona(gerente.getRepMotor(), inicio, fim, "à Vista");
-			solAndre.solicitarCarona(gerente.getRepMotor(), inicio, fim, "Cheque");
+			solPaula.solicitarCarona(motJose, inicio, fim, "Cartão");
+			solPedro.solicitarCarona(motAna, inicio, fim, "à Vista");
+			solAndre.solicitarCarona(motMaria, inicio, fim, "Cheque");
 			
 			//Listando todas as viagens feitas
 			for(Object motor: gerente.getRepMotor().getLista()){
