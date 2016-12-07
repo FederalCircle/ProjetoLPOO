@@ -46,8 +46,8 @@ public class MainWindow extends Application {
 		launch(args);
 	}
 	public void start(Stage window){
-		//new LoginWindow().display();
-		/**/
+		new LoginWindow().display();
+		/*/
 		try {
 			new MotoristaPanel().display(new Motorista("407.087.551-43", "paula@travel.com", "paula123", "Paula", "Feminino", true));
 		} catch (UsersExceptions e) {

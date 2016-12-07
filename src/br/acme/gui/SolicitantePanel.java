@@ -264,7 +264,6 @@ public class SolicitantePanel extends BasePanel{
 	
 	private ObservableList<eViagem> getViagens(){
         ObservableList<eViagem> infoviagens = FXCollections.observableArrayList();
-        
         try{
 	        for(Viagem v : user.getViagens().buscarTodos()){
 	        	if(v==null) break;

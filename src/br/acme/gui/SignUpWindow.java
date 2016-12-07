@@ -33,7 +33,7 @@ public class SignUpWindow extends MainWindow {
 				ComboBox<String> userType = new ComboBox<String>();
 				TextField nameInput = new TextField();
 				MaskTextField cpfInput = new MaskTextField();
-				TextField genderInput = new TextField();
+				ComboBox<String> genderInput = new ComboBox<String>();
 				MaskTextField emailInput = new MaskTextField();
 				PasswordField passInput = new PasswordField();
 				// Specifics Input
@@ -56,32 +56,21 @@ public class SignUpWindow extends MainWindow {
 			// Specifics Inputs
 				nascInput.setMask("NN/NN/NNNN");
 				nascInput.setPromptText("Data de Nascimento");
-				nascInput.setDisable(true);
-				phoneInput.setMask("NNNNN-NNNN");
-				phoneInput.setDisable(true);
+				phoneInput.setMask("N!-NNNN");
 				phoneInput.setPromptText("Número de Celular");
 			//Base inputs
 				// Labels
 				title.getStyleClass().addAll("lb-large", "bold");
 				// Inputs
-				userType.getItems().addAll("Solicitante", "Motorista", "Gerente");
-				userType.setPromptText("Tipo de Usuário");
-				userType.setOnAction(new EventHandler<ActionEvent>(){
-						public void handle(ActionEvent event) {
-							if(userType.getValue().equals("Solicitante")){
-								nascInput.setDisable(false);
-								phoneInput.setDisable(false);
-							}
-							else{
-								nascInput.setDisable(true);
-								phoneInput.setDisable(true);
-							}
-						}
-					});
+				userType.getItems().addAll("Solicitante");
+				userType.getSelectionModel().selectFirst();
+				userType.setDisable(true);
 				nameInput.setPromptText("Nome");
 				cpfInput.setPromptText("CPF");
 				cpfInput.setMask("NNN.NNN.NNN-NN");
-				genderInput.setPromptText("Sexo");
+				genderInput.getItems().addAll("Masculino", "Feminino");
+				genderInput.setPromptText("Gênero");
+				genderInput.setMaxWidth(Double.MAX_VALUE);
 				emailInput.setPromptText("Email");
 				emailInput.setMask("M!@I!.P!");
 				passInput.setPromptText("Senha");
@@ -92,7 +81,7 @@ public class SignUpWindow extends MainWindow {
 					confirmButton.setOnAction(new EventHandler<ActionEvent>(){
 						public void handle(ActionEvent event) {
 							String submition = userType.getValue()+";"+cpfInput.getText()+";"+emailInput.getText()+";"
-									+passInput.getText()+";"+nameInput.getText()+";"+genderInput.getText();
+									+passInput.getText()+";"+nameInput.getText()+";"+genderInput.getValue();
 							if(!nascInput.isDisabled())
 								submition=submition+";"+nascInput.getText()+";"+phoneInput.getText();
 							
@@ -134,6 +123,7 @@ public class SignUpWindow extends MainWindow {
 				Solicitante novoSoli = new Solicitante(infos[1], infos[2], infos[3], infos[4], infos[5], frmt.parse(infos[6]), infos[7]);
 				IRepositorio<Solicitante> repSoli = DATABASE.lerBaseSolicitante();
 				repSoli.adicionar(novoSoli);
+				DATABASE.salvarEstado(repSoli);
 				return true;
 			}catch(Exception e){
 				new AlertWindow().display(e.getMessage());
