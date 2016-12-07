@@ -59,6 +59,8 @@ public class LoginWindow extends MainWindow {
 									new SolicitantePanel().display(sol);
 									break;
 								case "Motorista":
+									Motorista mot = (Motorista) user;
+									new MotoristaPanel().display(mot);
 									break;
 								case "Gerente":
 									break;

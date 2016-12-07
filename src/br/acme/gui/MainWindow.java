@@ -4,7 +4,7 @@ package br.acme.gui;
 import java.util.Date;
 
 import br.acme.exception.UsersExceptions;
-import br.acme.users.Solicitante;
+import br.acme.users.*;
 import javafx.application.Application;
 import javafx.stage.*;
 import javafx.scene.image.*;
@@ -49,7 +49,7 @@ public class MainWindow extends Application {
 		//new LoginWindow().display();
 		/**/
 		try {
-			new SolicitantePanel().display(new Solicitante("407.087.551-43", "paula@travel.com", "paula123", "Paula", "Feminino", new Date(), "99112233"));
+			new MotoristaPanel().display(new Motorista("407.087.551-43", "paula@travel.com", "paula123", "Paula", "Feminino", true));
 		} catch (UsersExceptions e) {
 			e.printStackTrace();
 		}
